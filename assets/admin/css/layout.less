@@ -122,6 +122,34 @@ a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 
 
 
+/** 分页 **/
+.layui-laypage a{
+	color: @color-black;
+}
+.layui-laypage a:hover{color: @color-themePrimary;text-decoration: none;}
+.layui-laypage .layui-laypage-curr .layui-laypage-em{background-color: @color-themePrimary;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -208,27 +236,6 @@ a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 
 
 #body {
-	/*
-	#page-title {
-		padding: 15px 30px;
-		//font-size: @fontsize-title;
-		background: #1a3867;
-		color: aliceblue;
-
-		font-size: 20px;
-	}
-	#page-tools {
-		display: flex;
-		justify-content: space-between;
-		padding: 10px 30px;
-		border-bottom: 1px solid #dedede;
-		background: #F0F0F0;
-		.layui-btn {
-			line-height: 2.3em;
-			height: auto;
-		}
-	}
-	*/
 	#page-header {
 		display: flex;
 		background: #F0F0F0;
@@ -247,12 +254,6 @@ a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 				line-height: 2.3em;
 				height: auto;
 			}
-			.left {
-
-			}
-			.right {
-
-			}
 		}
 	}
 	#page-content {
@@ -268,14 +269,36 @@ a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 			padding: 8px 0;
 			padding-left: 30px;
 			&:hover {
-				cursor: pointer;
 				color: @color-headerBrandText;
 				background: @color-headerBackground;
+			}
+			a {
+				color: inherit;
+				&:hover {
+					text-decoration: none;
+				}
 			}
 		}
 	}
 	#main {
 		flex: 1;
 		padding: 30px;
+		width: calc(100% - 200px);
+		.list-filter {
+			.item {
+				float: left;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				margin-right: 1em;
+				.label {
+
+				}
+				.inline {
+					width: 190px;
+					margin-left: 1em;
+				}
+			}
+		}
 	}
 }
