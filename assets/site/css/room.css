@@ -1,0 +1,168 @@
+body {
+  background: url(//static.yizhibo.com/pc_live/static/images/bg_live_a438ece.png) center center;
+  background-size: 100% 100%;
+}
+#leftBar {
+  position: fixed;
+  width: 70px;
+  height: 100%;
+  color: #ffffff;
+  background: #27292a;
+  text-align: center;
+}
+#leftBar .logo {
+  margin: 20px 0;
+}
+#leftBar .logo img {
+  width: 60px;
+}
+#leftBar .nav a {
+  display: block;
+  margin: 30px 0;
+  color: inherit;
+}
+#leftBar .nav a:hover {
+  color: #ffd727;
+}
+#main {
+  position: absolute;
+  left: 50%;
+  display: flex;
+  height: 100%;
+  margin: auto;
+  color: #ffffff;
+  transform: translate(-50%, 0);
+}
+#main > .block.info {
+  display: flex;
+  flex-direction: column;
+  width: 315px;
+  background-color: rgba(18, 19, 29, 0.8);
+}
+#main > .block.info .person {
+  display: flex;
+  margin: 15px;
+  align-items: center;
+}
+#main > .block.info .person .avatar {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  overflow: hidden;
+}
+#main > .block.info .person .avatar img {
+  width: 100%;
+  height: 100%;
+}
+#main > .block.info .person .avatar:hover {
+  border-color: #ffa000;
+}
+#main > .block.info .person .summary {
+  flex: 1;
+  margin: 0 1em 0 5px;
+}
+#main > .block.info .person .summary .gift {
+  font-size: 12px;
+  color: #999;
+}
+#main > .block.info .person .interaction button {
+  color: #ffffff;
+  background: #ffa000;
+}
+#main > .block.info .person .interaction button:hover {
+  border-color: #ffffff;
+}
+#main > .block.info .guest {
+  flex: 1;
+  margin: 15px;
+  padding: 15px 0;
+  border-top: 1px solid #999;
+  overflow: hidden;
+}
+#main > .block.info .guest .list .item {
+  display: flex;
+  margin: 15px 0;
+  align-items: center;
+}
+#main > .block.info .guest .list .item .avatar {
+  width: 30px;
+  height: 30px;
+  margin-right: 1em;
+  border-radius: 50%;
+  overflow: hidden;
+}
+#main > .block.info .guest .list .item .avatar img {
+  width: 100%;
+  height: 100%;
+}
+#main > .block.info .guest .list .item .name {
+  color: #999;
+}
+#main > .block.media {
+  flex: 1;
+  min-width: 530px;
+  max-width: 750px;
+  background: #000000;
+}
+#main > .block.media #video {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 100%;
+}
+#main > .block.chat {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  background-color: rgba(18, 19, 29, 0.8);
+}
+#main > .block.chat .notice {
+  padding: 15px;
+  background-color: #3D4145;
+}
+#main > .block.chat .notice > div {
+  font-size: 12px;
+}
+#main > .block.chat .list {
+  flex: 1;
+  padding: 0 15px;
+  overflow: hidden;
+}
+#main > .block.chat .list .item {
+  display: flex;
+  margin: 15px 0;
+}
+#main > .block.chat .list .item .avatar img {
+  width: 40px;
+  height: 40px;
+}
+#main > .block.chat .list .item .message {
+  margin-left: 1em;
+  padding: 5px;
+  background-color: #3D4145;
+}
+#main > .block.chat .list .item .message .name {
+  color: #ffa000;
+  font-size: 12px;
+}
+#main > .block.chat .form {
+  display: flex;
+  padding: 15px;
+  background-color: #3D4145;
+}
+#main > .block.chat .form .message {
+  flex: 1;
+  margin-right: 1em;
+}
+#main > .block.chat .form .message input {
+  color: #ffffff;
+  background: none;
+}
+#main > .block.chat .form button {
+  color: #ffffff;
+  background: #ffa000;
+}
+#main > .block.chat .form button:hover {
+  border-color: #ffffff;
+}

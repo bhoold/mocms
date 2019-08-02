@@ -1,0 +1,289 @@
+@import "_var";
+
+
+
+#body {
+	padding: 30px 0;
+	&::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+	.block {
+		margin-bottom: 20px !important;
+		&::after {
+			content: "";
+			display: block;
+			clear: both;
+		}
+		h2 {
+			margin-bottom: 8px;
+			line-height: 1.5em;
+			font-size: @fontsize-title;
+			font-weight: 500;
+			i.layui-icon {
+				color: @color-link;
+				font-size: inherit;
+			}
+
+		}
+	}
+}
+
+#main {
+	float: left;
+	width: 1216px;
+	.block.focus {
+		margin: -8px;
+		.item {
+			position: relative;
+			float: left;
+			width: 160px;
+			height: 160px;
+			margin: 8px;
+			border-radius: 8px;
+			overflow: hidden;
+			&:hover {
+				.cover {
+					transform: scale(1.1);
+				}
+				.summary {
+					bottom: 0;
+				}
+			}
+			&:first-child {
+				width: 335px;
+				height: 335px;
+				.summary {
+					bottom: 0;
+					padding: 10px;
+					.name {
+						margin: 5px 0;
+						color: @color-white;
+						font-size: @fontsize-nav;
+					}
+					.title {
+						font-size: @fontsize-generalAlt;
+						color: @color-grey;
+					}
+				}
+			}
+			.cover{
+				width: 100%;
+				height: 100%;
+				transition: all .6s;
+			}
+			.summary {
+				position: absolute;
+				bottom: -31px;
+				width: 100%;
+				padding: 5px 10px;
+				background: rgba(0, 0, 0, 0.5);
+				box-sizing: border-box;
+				transition: all .2s;
+				.name {
+					color: @color-link;
+				}
+			}
+		}
+	}
+	.block.new {
+		.list {
+			margin: -8px;
+			overflow: hidden;
+		}
+		.item {
+			position: relative;
+			float: left;
+			width: 160px;
+			margin: 8px;
+			border-radius: 8px;
+			background: @color-white;
+			overflow: hidden;
+			.cover {
+				width: 100%;
+				height: 100%;
+				transition: all .6s;
+			}
+			.summary {
+				padding: 5px 10px;
+				.name {
+					font-size: @fontsize-small;
+				}
+			}
+		}
+	}
+	.class{
+		width: 1240px;
+		margin-left: -8px;
+	}
+	.block.tag1, .block.tag2, .block.tag3, .block.tag4 {
+		float: left;
+		width: 294px;
+		margin: 8px;
+		.list {
+			margin: -8px;
+			overflow: hidden;
+		}
+		.item {
+			position: relative;
+			float: left;
+			width: 135px;
+			margin: 8px;
+			border-radius: 8px;
+			background: @color-white;
+			overflow: hidden;
+			.cover {
+				width: 100%;
+				height: 100%;
+				transition: all .6s;
+			}
+			.summary {
+				padding: 2px 8px;
+				overflow: hidden;
+				.name {
+					float: left;
+					font-size: @fontsize-small;
+				}
+				.numbers {
+					float: right;
+					font-size: @fontsize-small;
+				}
+			}
+		}
+	}
+
+	.block.streamer {
+		.list {
+			margin: -8px;
+			overflow: hidden;
+		}
+		.item {
+			position: relative;
+			float: left;
+			width: 160px;
+			margin: 8px;
+			border-radius: 8px;
+			background: @color-white;
+			overflow: hidden;
+			.cover {
+				width: 100%;
+				height: 100%;
+				transition: all .6s;
+			}
+			.summary {
+				padding: 5px 10px;
+				.numbers {
+					font-size: @fontsize-small;
+					i {
+						font-size: inherit;
+					}
+				}
+			}
+		}
+	}
+
+
+}
+
+#side {
+	float: right;
+	width: 335px;
+	.block {
+		margin-bottom: 20px;
+		.item {
+			display: table;
+			width: 100%;
+			height: 55px;
+			border-bottom: 1px solid #f7f7f7;
+			background: @color-white;
+			&.big {
+				height: 68px;
+				.avatar {
+					img {
+						width: 48px;
+						height: 48px;
+						margin-left: 0;
+					}
+				}
+			}
+			.ranking {
+				display: table-cell;
+				width: 60px;
+				vertical-align: middle;
+				text-align: center;
+				img {
+					width: 20px;
+				}
+			}
+			.avatar {
+				display: table-cell;
+				width: 70px;
+				vertical-align: middle;
+				text-align: left;
+				img {
+					width: 40px;
+					height: 40px;
+					margin-left: 3px;
+					border-radius: 50%;
+				}
+			}
+			.info {
+				display: table-cell;
+				vertical-align: middle;
+				.numbers {
+					font-size: @fontsize-small;
+					i {
+						font-size: inherit;
+					}
+				}
+			}
+		}
+
+		&.hot {
+			.item {
+				.info {
+					i.layui-icon {
+						color: @color-link;
+					}
+				}
+			}
+
+		}
+
+		&.streamer {
+			h2 {
+				overflow: hidden;
+				&>span {
+					float: left;
+				}
+				.period {
+					float: right;
+					font-weight: 400;
+					font-size: @fontsize-generalAlt;
+					a.active {
+						color: @color-link;
+					}
+				}
+			}
+		}
+
+		&.toff {
+			h2 {
+				overflow: hidden;
+				&>span {
+					float: left;
+				}
+				.period {
+					float: right;
+					font-weight: 400;
+					font-size: @fontsize-generalAlt;
+					a.active {
+						color: @color-link;
+					}
+				}
+			}
+		}
+	}
+}
+

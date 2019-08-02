@@ -1,0 +1,282 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-justify {
+  text-align: justify;
+}
+.text-nowrap {
+  white-space: nowrap;
+}
+.text-lowercase {
+  text-transform: lowercase;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
+a {
+  color: #000000;
+  text-decoration: none;
+}
+a:link {
+  color: #0078d4;
+}
+a:visited {
+  color: #0078d4;
+}
+a:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+a:focus {
+  color: #0078d4;
+}
+a:active {
+  color: #000000;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  font-size: 14px;
+  line-height: 1.75em;
+  font-family: "Segoe UI Webfont", -apple-system, "Helvetica Neue", "Lucida Grande", "Roboto", "Ebrima", "Nirmala UI", "Gadugi", "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", "Tunga", "Lao UI", "Raavi", "Iskoola Pota", "Latha", "Leelawadee", "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa", "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le", "Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
+  color: #000000;
+}
+/* 按钮容 */
+a.layui-btn,
+.layui-btn {
+  background-color: #e1dfdd;
+  color: #323130;
+  transition: none;
+}
+a.layui-btn:hover,
+.layui-btn:hover {
+  color: #201f1e;
+  text-decoration: none;
+}
+a.layui-btn:active,
+.layui-btn:active {
+  color: #201f1e;
+}
+/* 原始 */
+a.layui-btn-primary,
+.layui-btn-primary {
+  border-color: #0078d4;
+  background-color: #0078d4;
+  color: #ffffff;
+}
+a.layui-btn-primary:hover,
+.layui-btn-primary:hover {
+  border-color: #106EBE;
+  color: #ffffff;
+  text-decoration: none;
+}
+a.layui-btn-primary:active,
+.layui-btn-primary:active {
+  color: #ffffff;
+}
+/* 百搭 */
+a.layui-btn-normal,
+.layui-btn-normal {
+  background-color: #e1dfdd;
+}
+/* 禁用 */
+.layui-btn-disabled,
+.layui-btn-disabled:hover,
+.layui-btn-disabled:active {
+  border: 1px solid #f3f2f1;
+  background-color: #f3f2f1;
+  color: #d2d0ce;
+}
+.layui-btn-group .layui-btn {
+  border-left: 1px solid #e1dfdd;
+}
+.layui-btn-group .layui-btn-primary:hover {
+  border-color: #106EBE;
+  color: #ffffff;
+}
+.layui-btn-group .layui-btn-primary:first-child {
+  border-left: 1px solid #0078d4;
+}
+/* 复选框 */
+.layui-form-checked,
+.layui-form-checked:hover {
+  border-color: #0078d4;
+}
+.layui-form-checked span,
+.layui-form-checked:hover span {
+  background-color: inherit;
+}
+.layui-form-checked i,
+.layui-form-checked:hover i {
+  color: #0078d4;
+}
+/* 复选框-原始风格 */
+.layui-form-checkbox[lay-skin="primary"]:hover i {
+  border-color: #0078d4;
+  color: #fff;
+}
+.layui-form-checked[lay-skin="primary"] i {
+  border-color: #0078d4 !important;
+  background-color: #0078d4;
+  color: #fff;
+}
+/* 复选框-开关风格 */
+.layui-form-onswitch {
+  border-color: #0078d4;
+  background-color: #0078d4;
+}
+/* 单选框 */
+.layui-form-radioed > i,
+.layui-form-radio > i:hover {
+  color: #0078d4;
+}
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  color: #d9d9d9;
+  background: #10223e;
+}
+#header .logo {
+  margin: 0 30px;
+  font-size: 14px;
+}
+#header .logo a {
+  color: #d9d9d9;
+  text-decoration: none;
+}
+#header .nav {
+  flex: 1;
+  display: flex;
+}
+#header .nav .item {
+  padding: 0 10px;
+}
+#header .nav .item a {
+  color: #d9d9d9;
+}
+#header .icon-container {
+  height: 100%;
+}
+#header .icon-container button {
+  float: left;
+  margin: 0;
+  height: inherit;
+  color: #FFFFFF;
+  background: #0078d4;
+}
+#header .icon-container button:hover {
+  background: #005A9E;
+}
+#header .icon-container button:focus {
+  outline: 1px solid;
+  outline-offset: -1px;
+  background: #005A9E;
+}
+#header .icon-container button i {
+  font-size: 24px;
+}
+#header .person {
+  height: 100%;
+  margin-right: 30px;
+}
+#header .person button.name {
+  height: inherit;
+  color: #d9d9d9;
+  background: #10223e;
+  line-height: 30px;
+}
+#header .person button.name:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+#header .person button.name:focus {
+  outline: 1px solid;
+  outline-offset: -1px;
+}
+#body {
+  /*
+	#page-title {
+		padding: 15px 30px;
+		//font-size: @fontsize-title;
+		background: #1a3867;
+		color: aliceblue;
+
+		font-size: 20px;
+	}
+	#page-tools {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 30px;
+		border-bottom: 1px solid #dedede;
+		background: #F0F0F0;
+		.layui-btn {
+			line-height: 2.3em;
+			height: auto;
+		}
+	}
+	*/
+}
+#body #page-header {
+  display: flex;
+  background: #F0F0F0;
+  border-bottom: 1px solid #dedede;
+}
+#body #page-header .title {
+  min-width: 200px;
+  padding: 15px 30px;
+  font-size: 20px;
+}
+#body #page-header .tooles {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+}
+#body #page-header .tooles .layui-btn {
+  line-height: 2.3em;
+  height: auto;
+}
+#body #page-content {
+  display: flex;
+}
+#body #left-menu {
+  width: 200px;
+  padding: 30px 0;
+  border-bottom: 1px solid #dedede;
+  border-right: 1px solid #dedede;
+  background: #F0F0F0;
+}
+#body #left-menu .item {
+  padding: 8px 0;
+  padding-left: 30px;
+}
+#body #left-menu .item:hover {
+  cursor: pointer;
+  color: #FFFFFF;
+  background: #0078d4;
+}
+#body #main {
+  flex: 1;
+  padding: 30px;
+}

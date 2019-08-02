@@ -1,0 +1,281 @@
+@import "_var";
+
+
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+*:before,*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.text-right {
+	text-align: right;
+}
+.text-center {
+    text-align: center
+}
+
+.text-justify {
+    text-align: justify
+}
+
+.text-nowrap {
+    white-space: nowrap
+}
+
+.text-lowercase {
+    text-transform: lowercase
+}
+
+.text-uppercase {
+    text-transform: uppercase
+}
+
+.text-capitalize {
+    text-transform: capitalize
+}
+
+
+
+
+a {
+    color: @color-black;
+    text-decoration: none;
+}
+
+a:link {
+    color: @color-themePrimary;
+}
+
+a:visited {
+    color: @color-themePrimary;
+}
+
+a:hover {
+	color: @color-black;
+	text-decoration: underline;
+}
+
+a:focus {
+    color: @color-themePrimary;
+}
+
+a:active {
+    color: @color-black;
+}
+
+
+
+html, body {
+	height: 100%;
+}
+
+body {
+	font-size: 14px;
+	line-height: 1.75em;
+	font-family: "Segoe UI Webfont",-apple-system,"Helvetica Neue","Lucida Grande","Roboto","Ebrima","Nirmala UI","Gadugi","Segoe Xbox Symbol","Segoe UI Symbol","Meiryo UI","Khmer UI","Tunga","Lao UI","Raavi","Iskoola Pota","Latha","Leelawadee","Microsoft YaHei UI","Microsoft JhengHei UI","Malgun Gothic","Estrangelo Edessa","Microsoft Himalaya","Microsoft New Tai Lue","Microsoft PhagsPa","Microsoft Tai Le","Microsoft Yi Baiti","Mongolian Baiti","MV Boli","Myanmar Text","Cambria Math";
+	color: @color-black;
+}
+
+
+/* 按钮容 */
+a.layui-btn, .layui-btn{background-color: @color-neutralQuaternaryAlt; color: @color-neutralPrimary; transition: none;}
+a.layui-btn:hover, .layui-btn:hover{color: @color-neutralDark; text-decoration: none;}
+a.layui-btn:active, .layui-btn:active{color: @color-neutralDark;}
+
+
+/* 原始 */a.layui-btn-primary, .layui-btn-primary{border-color: @color-themePrimary; background-color: @color-themePrimary; color: @color-white;}
+a.layui-btn-primary:hover, .layui-btn-primary:hover{border-color: @color-themeDarkAlt; color: @color-white; text-decoration: none;}
+a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
+/* 百搭 */a.layui-btn-normal, .layui-btn-normal{background-color: @color-neutralQuaternaryAlt;}
+/* 禁用 */.layui-btn-disabled,.layui-btn-disabled:hover,.layui-btn-disabled:active{border: 1px solid @color-neutralLighter; background-color: @color-neutralLighter; color: @color-neutralQuaternary;}
+
+.layui-btn-group .layui-btn{border-left: 1px solid @color-neutralQuaternaryAlt;}
+.layui-btn-group .layui-btn-primary:hover{border-color: @color-themeDarkAlt; color: @color-white;}
+.layui-btn-group .layui-btn-primary:first-child{border-left: 1px solid @color-themePrimary;}
+
+
+
+
+
+/* 复选框 */
+.layui-form-checked, .layui-form-checked:hover{border-color: @color-themePrimary;}
+.layui-form-checked span, .layui-form-checked:hover span{background-color: inherit;}
+.layui-form-checked i, .layui-form-checked:hover i{color: @color-themePrimary;}
+
+/* 复选框-原始风格 */
+.layui-form-checkbox[lay-skin="primary"]:hover i{border-color: @color-themePrimary; color: #fff;}
+.layui-form-checked[lay-skin="primary"] i{border-color: @color-themePrimary !important; background-color: @color-themePrimary; color: #fff;}
+
+/* 复选框-开关风格 */
+.layui-form-onswitch{border-color: @color-themePrimary; background-color: @color-themePrimary;}
+
+
+/* 单选框 */
+.layui-form-radioed>i,.layui-form-radio>i:hover{color: @color-themePrimary;}
+
+
+
+
+
+
+#header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	//height: 50px;
+	//color: @color-headerBrandText;
+	//background: @color-headerBackground;
+	height: 30px;
+	color: #d9d9d9;
+	background: #10223e;
+	.logo {
+		//margin: 0 1em;
+		//font-size: @fontsize-logo;
+		margin: 0 30px;
+		font-size: 14px;
+		a {
+			//color: @color-headerBrandText;
+			color: #d9d9d9;
+			text-decoration: none;
+		}
+	}
+	.nav {
+		flex: 1;
+		display: flex;
+		.item {
+			padding: 0 10px;
+			a {
+				color: #d9d9d9;
+			}
+		}
+	}
+	.icon-container {
+		height: 100%;
+		button {
+			float: left;
+			margin: 0;
+			height: inherit;
+			color: @color-headerTextIcons;
+			background: @color-headerButtonsBackground;
+			&:hover {
+				background: @color-headerButtonsBackgroundHover;
+			}
+			&:focus {
+				outline: 1px solid;
+				outline-offset: -1px;
+				background: @color-headerButtonsBackgroundHover;
+			}
+			i {
+				font-size: @fontsize-big;
+			}
+		}
+	}
+	.person {
+		height: 100%;
+		margin-right: 30px;
+		button.name {
+			height: inherit;
+			//color: @color-headerTextIcons;
+			//background: @color-headerButtonsBackground;
+			color: #d9d9d9;
+			background: #10223e;
+			line-height: 30px;
+			&:hover {
+				//background: @color-headerButtonsBackgroundHover;
+				color: @color-white;
+				text-decoration: underline;
+			}
+			&:focus {
+				outline: 1px solid;
+				outline-offset: -1px;
+				//background: @color-headerButtonsBackgroundHover;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+#body {
+	/*
+	#page-title {
+		padding: 15px 30px;
+		//font-size: @fontsize-title;
+		background: #1a3867;
+		color: aliceblue;
+
+		font-size: 20px;
+	}
+	#page-tools {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 30px;
+		border-bottom: 1px solid #dedede;
+		background: #F0F0F0;
+		.layui-btn {
+			line-height: 2.3em;
+			height: auto;
+		}
+	}
+	*/
+	#page-header {
+		display: flex;
+		background: #F0F0F0;
+		border-bottom: 1px solid #dedede;
+		.title {
+			min-width: 200px;
+			padding: 15px 30px;
+			font-size: 20px;
+		}
+		.tooles {
+			flex: 1;
+			display: flex;
+			justify-content: space-between;
+			padding: 10px 30px;
+			.layui-btn {
+				line-height: 2.3em;
+				height: auto;
+			}
+			.left {
+
+			}
+			.right {
+
+			}
+		}
+	}
+	#page-content {
+		display: flex;
+	}
+	#left-menu {
+		width: 200px;
+		padding: 30px 0;
+		border-bottom: 1px solid #dedede;
+		border-right: 1px solid #dedede;
+		background: #F0F0F0;
+		.item {
+			padding: 8px 0;
+			padding-left: 30px;
+			&:hover {
+				cursor: pointer;
+				color: @color-headerBrandText;
+				background: @color-headerBackground;
+			}
+		}
+	}
+	#main {
+		flex: 1;
+		padding: 30px;
+	}
+}

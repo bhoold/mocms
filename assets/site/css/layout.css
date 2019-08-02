@@ -1,0 +1,232 @@
+.clear {
+  height: 0;
+  clear: both;
+}
+.container {
+  margin: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 1580px;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  font-size: 14px;
+  line-height: 1.5em;
+  font-family: \5FAE\8F6F\96C5\9ED1,arial,\5b8b\4f53;
+  cursor: default;
+  background: #f1f1f1;
+}
+#header {
+  height: 70px;
+  background: #ffffff;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.01);
+}
+#header .container {
+  height: 100%;
+  line-height: 70px;
+  background: inherit;
+}
+#header .container::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+#header .logo {
+  float: left;
+  margin-right: 20px;
+}
+#header .logo img {
+  height: 50px;
+}
+#header .nav {
+  float: left;
+  font-size: 18px;
+}
+#header .nav a {
+  position: relative;
+  display: block;
+  float: left;
+  margin: 0 15px;
+}
+#header .nav a.active {
+  color: #ffd727;
+}
+#header .nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 15px;
+  height: 3px;
+  background: #ffd727;
+  transform: translate(50%, -8px);
+}
+#header .nav a:hover {
+  color: #ffd727;
+}
+#header .search {
+  float: left;
+  margin-left: 30px;
+  margin-top: 20px;
+  padding: 5px 15px;
+  background: #f2f2f2;
+  line-height: 1.5em;
+  border-radius: 15px;
+}
+#header .search .input-search {
+  width: 190px;
+  border: none;
+  background: none;
+}
+#header .search .btn-search {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+#header .user {
+  float: right;
+  display: flex;
+  font-size: 18px;
+}
+#header .user .person {
+  display: flex;
+  align-items: center;
+  line-height: 1.5em;
+  font-size: 14px;
+}
+#header .user .person:hover {
+  color: #ffa000;
+}
+#header .user .person .avatar {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+#header .user .person .avatar img {
+  width: 100%;
+  height: 100%;
+}
+#header .user .btn-login {
+  cursor: pointer;
+}
+#header .user .btn-signup {
+  cursor: pointer;
+}
+#loginModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+}
+#loginModal > .mask {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+}
+#loginModal > .content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  padding: 10px 20px;
+  background: #ffffff;
+  transform: translate(-50%, -50%);
+}
+#loginModal > .content .close {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  cursor: pointer;
+}
+#loginModal > .content .title {
+  margin-bottom: 2em;
+}
+#loginModal > .content .form .item {
+  margin: 10px 0;
+}
+#loginModal > .content .form .item button {
+  display: block;
+  width: 100%;
+  color: #ffffff;
+  background: #ffa000;
+  border: 1px solid #ffa000;
+  transition: none;
+}
+#loginModal > .content .form .item button:hover {
+  border-color: #ffffff;
+}
+#loginModal > .content .footer {
+  margin: 30px 0 20px;
+}
+#loginModal > .content .footer a {
+  cursor: pointer;
+  color: #ffa000;
+}
+#signupModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+}
+#signupModal > .mask {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+}
+#signupModal > .content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  padding: 10px 20px;
+  background: #ffffff;
+  transform: translate(-50%, -50%);
+}
+#signupModal > .content .close {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  cursor: pointer;
+}
+#signupModal > .content .title {
+  margin-bottom: 2em;
+}
+#signupModal > .content .form .item {
+  margin: 10px 0;
+}
+#signupModal > .content .form .item button {
+  display: block;
+  width: 100%;
+  color: #ffffff;
+  background: #ffa000;
+  border: 1px solid #ffa000;
+  transition: none;
+}
+#signupModal > .content .form .item button:hover {
+  border-color: #ffffff;
+}
+#signupModal > .content .footer {
+  margin: 30px 0 20px;
+}
+#signupModal > .content .footer a {
+  cursor: pointer;
+  color: #ffa000;
+}
+#footer {
+  min-height: 200px;
+  line-height: 200px;
+  text-align: center;
+  color: #999;
+  background: #27292a;
+}

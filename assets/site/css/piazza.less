@@ -1,0 +1,102 @@
+@import "_var";
+
+
+
+#header {
+	position: absolute;
+	top: 0;
+	width: 100%;
+    z-index: 2;
+}
+
+
+
+#leftBar {
+	position: fixed;
+	top: 0;
+	width: 180px;
+	height: 100%;
+	padding-top: 100px;
+	color: @color-greyAlt;
+	background: @color-blackAlt;
+	font-size: @fontsize-generalAlt;
+	.title {
+		text-align: center;
+		color: @color-white;
+		font-size: @fontsize-title;
+	}
+	.nav {text-align: center;
+		a {
+			display: block;
+			margin: 30px 0;
+			padding: 0 40px;
+			color: inherit;
+			&:hover {
+				color: @color-primary;
+			}
+		}
+	}
+}
+
+#main {
+	margin-top: 70px;
+	margin-left: 220px;
+	.tags {
+		padding-top: 15px;
+		overflow: hidden;
+		.item {
+			float: left;
+			margin: 15px 5px;
+			padding: 3px 15px;
+			border: 1px solid @color-greyAlt;
+			border-radius: 15px;
+			font-size: @fontsize-small;
+			background: @color-white;
+			&.active {
+				background: @color-primary;
+			}
+		}
+	}
+	.list {
+		margin: -8px;
+		overflow: hidden;
+		.item {
+			position: relative;
+			float: left;
+			width: 180px;
+			margin: 8px;
+			border-radius: 8px;
+			background: @color-white;
+			overflow: hidden;
+			.cover {
+				width: 100%;
+				height: 100%;
+				transition: all .6s;
+			}
+			.summary {
+				padding: 5px 10px;
+				.numbers {
+					font-size: @fontsize-small;
+					i {
+						font-size: inherit;
+					}
+				}
+			}
+		}
+	}
+	.pager {
+		margin: 30px 0 100px;
+		text-align: center;
+		.item {
+			display: inline-block;
+			width: 2.5em;
+			height: 2.5em;
+			line-height: 2.5em;
+			text-align: center;
+			&.active {
+				font-weight: 700;
+				background: @color-primary;
+			}
+		}
+	}
+}
