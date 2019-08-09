@@ -16,13 +16,10 @@
 	<div id="page-content">
 		<div id="left-menu">
 			<div class="list">
-				<div class="item">全局配置</div>
-				<div class="item">操作日志</div>
-				<div class="item">广告管理</div>
-				<div class="item">缓存管理</div>
-				<div class="item">数据签入</div>
-				<div class="item">联系方式</div>
-				<div class="item">文章管理</div>
+				<div class="item">全局设置</div>
+				<div class="item">功能模块</div>
+				<div class="item">数据模型</div>
+				<div class="item">页面模板</div>
 			</div>
 		</div>
 		<div id="main">

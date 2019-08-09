@@ -14,6 +14,7 @@ class Dashboard extends MY_Controller {
 	 */
 	public function index()
 	{
+		//getCurUser();
 		$data = array();
 		$data['list'] = array(0 => array(
 			'id' => '1',

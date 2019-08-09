@@ -46,27 +46,27 @@ class Ion_auth_model extends CI_Model
 
 	/**
 	 * activation code
-	 * 
+	 *
 	 * Set by deactivate() function
-	 * Also set on register() function, if email_activation 
+	 * Also set on register() function, if email_activation
 	 * option is activated
-	 * 
-	 * This is the value devs should give to the user 
+	 *
+	 * This is the value devs should give to the user
 	 * (in an email, usually)
-	 * 
+	 *
 	 * It contains the *user* version of the activation code
-	 * It's a value of the form "selector.validator" 
-	 * 
+	 * It's a value of the form "selector.validator"
+	 *
 	 * This is not the same activation_code as the one in DB.
 	 * The DB contains a *hashed* version of the validator
 	 * and a selector in another column.
-	 * 
+	 *
 	 * THe selector is not private, and only used to lookup
 	 * the validator.
-	 * 
+	 *
 	 * The validator is private, and to be only known by the user
 	 * So in case of DB leak, nothing could be actually used.
-	 * 
+	 *
 	 * @var string
 	 */
 	public $activation_code;
@@ -205,7 +205,7 @@ class Ion_auth_model extends CI_Model
 
 		// initialize the database
 		$group_name = $this->config->item('database_group_name', 'ion_auth');
-		if (empty($group_name)) 
+		if (empty($group_name))
 		{
 			// By default, use CI's db that should be already loaded
 			$CI =& get_instance();
@@ -215,7 +215,7 @@ class Ion_auth_model extends CI_Model
 		{
 			// For specific group name, open a new specific connection
 			$this->db = $this->load->database($group_name, TRUE, TRUE);
-		}   
+		}
 
 		// initialize db tables data
 		$this->tables = $this->config->item('tables', 'ion_auth');
@@ -374,7 +374,7 @@ class Ion_auth_model extends CI_Model
 	/**
 	 * Get a user by its activation code
 	 *
-	 * @param bool       $user_code	the activation code 
+	 * @param bool       $user_code	the activation code
 	 * 								It's the *user* one, containing "selector.validator"
 	 * 								the one you got in activation_code member
 	 *
@@ -386,7 +386,7 @@ class Ion_auth_model extends CI_Model
 		// Retrieve the token object from the code
 		$token = $this->_retrieve_selector_validator_couple($user_code);
 
-		if ($token) 
+		if ($token)
 		{
 			// Retrieve the user according to this selector
 			$user = $this->where('activation_selector', $token->selector)->users()->row();
@@ -408,7 +408,7 @@ class Ion_auth_model extends CI_Model
 	 * Validates and removes activation code.
 	 *
 	 * @param int|string $id		the user identifier
-	 * @param bool       $code		the *user* activation code 
+	 * @param bool       $code		the *user* activation code
 	 * 								if omitted, simply activate the user without check
 	 *
 	 * @return bool
@@ -954,7 +954,7 @@ class Ion_auth_model extends CI_Model
 						$this->clear_remember_code($identity);
 					}
 				}
-				
+
 				// Rehash if needed
 				$this->rehash_password_if_needed($user->password, $identity, $password);
 
@@ -1511,6 +1511,7 @@ class Ion_auth_model extends CI_Model
 
 		return $this;
 	}
+
 
 	/**
 	 * get_users_groups
@@ -2795,4 +2796,82 @@ class Ion_auth_model extends CI_Model
 			return FALSE;
 		}
 	}
+
+
+
+	/**
+	 * 用户列表
+	 *
+	 * @param array $filter		查询条件
+	 * @param number $num		当前页数
+	 * @param number $size		每页数量
+	 * @return array
+	 */
+	public function usersList($filter, $num, $size) {
+		$this->db->reset_query();
+
+		foreach($filter as $key => $value) {
+			if($key == 'where'){
+				$this->db->where($value);
+			}elseif($key == 'like'){
+				$this->db->like($value);
+			}
+		}
+
+		$this->db->from($this->tables['users']);
+		$count = $this->db->count_all_results('', false);
+
+		$this->db->select('*');
+		$this->db->order_by('id DESC');
+		$this->db->limit($size, ($num-1)*$size);//从0开始要减1
+
+		$query = $this->db->get();
+
+		//echo $this->db->last_query();
+
+		return array(
+			'list' => $query->result_array(),
+			'count' => $count
+		);
+	}
+
+
+	/**
+	 * 用户组列表
+	 *
+	 * @param array $filter		查询条件
+	 * @param number $num		当前页数
+	 * @param number $size		每页数量
+	 * @return array
+	 */
+	public function groupsList($filter, $num, $size) {
+		$this->db->reset_query();
+
+		foreach($filter as $key => $value) {
+			if($key == 'where'){
+				$this->db->where($value);
+			}elseif($key == 'like'){
+				$this->db->like($value);
+			}
+		}
+
+		$this->db->from($this->tables['groups']);
+		$count = $this->db->count_all_results('', false);
+
+		$this->db->select('*');
+		$this->db->order_by('id DESC');
+		$this->db->limit($size, ($num-1)*$size);//从0开始要减1
+
+		$query = $this->db->get();
+
+		//echo $this->db->last_query();
+
+		return array(
+			'list' => $query->result_array(),
+			'count' => $count
+		);
+	}
+
+
+
 }

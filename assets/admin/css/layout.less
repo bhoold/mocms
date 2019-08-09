@@ -85,16 +85,23 @@ body {
 
 
 /* 按钮容 */
-a.layui-btn, .layui-btn{background-color: @color-neutralQuaternaryAlt; color: @color-neutralPrimary; transition: none;}
+a.layui-btn, .layui-btn{
+	background-color: @color-neutralQuaternaryAlt; color: @color-neutralPrimary;
+	height: auto;
+	line-height: 32px;
+}
 a.layui-btn:hover, .layui-btn:hover{color: @color-neutralDark; text-decoration: none;}
 a.layui-btn:active, .layui-btn:active{color: @color-neutralDark;}
 
 
-/* 原始 */a.layui-btn-primary, .layui-btn-primary{border-color: @color-themePrimary; background-color: @color-themePrimary; color: @color-white;}
+/* 原始 */a.layui-btn-primary, .layui-btn-primary{border-width:0; border-color: @color-themePrimary; background-color: @color-themePrimary; color: @color-white;}
 a.layui-btn-primary:hover, .layui-btn-primary:hover{border-color: @color-themeDarkAlt; color: @color-white; text-decoration: none;}
 a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 /* 百搭 */a.layui-btn-normal, .layui-btn-normal{background-color: @color-neutralQuaternaryAlt;}
 /* 禁用 */.layui-btn-disabled,.layui-btn-disabled:hover,.layui-btn-disabled:active{border: 1px solid @color-neutralLighter; background-color: @color-neutralLighter; color: @color-neutralQuaternary;}
+
+/* 警告 */a.layui-btn-danger, .layui-btn-danger{background-color: #FF5722;color: #fff;}
+a.layui-btn-danger:hover, .layui-btn-danger:hover{color: #fff;}
 
 .layui-btn-group .layui-btn{border-left: 1px solid @color-neutralQuaternaryAlt;}
 .layui-btn-group .layui-btn-primary:hover{border-color: @color-themeDarkAlt; color: @color-white;}
@@ -102,6 +109,10 @@ a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 
 
 
+/* 表单 */
+.layui-input, .layui-textarea, .layui-select{
+	height: 32px;
+}
 
 
 /* 复选框 */
@@ -128,14 +139,31 @@ a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 }
 .layui-laypage a:hover{color: @color-themePrimary;text-decoration: none;}
 .layui-laypage .layui-laypage-curr .layui-laypage-em{background-color: @color-themePrimary;}
+.layui-laypage input:focus,
+.layui-laypage select:focus{border-color: @color-themePrimary!important;}
 
 
 
+/* 表格 */
+.layui-table-view {
+	.layui-table-edit{
+		height: 30px;
+		line-height: 30px;
+	}
+	.layui-table-edit:focus{border-color: @color-themePrimary!important;}
 
-
-
-
-
+	.layui-table-cell {
+		.layui-btn {
+			height: 22px;
+			line-height: 22px;
+			padding: 0 5px;
+			font-size: 12px;
+		}
+		.layui-form-checkbox[lay-skin="primary"] {
+			margin-top: 0;
+		}
+	}
+}
 
 
 
@@ -177,10 +205,48 @@ a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 	.nav {
 		flex: 1;
 		display: flex;
-		.item {
-			padding: 0 10px;
+		&>.item {
+			position: relative;
 			a {
 				color: #d9d9d9;
+				cursor: pointer;
+				&:hover {
+					color: #fff;
+					text-decoration: none;
+				}
+			}
+			&>a {
+				display: block;
+				padding: 0 10px;
+				line-height: 30px;
+				&:focus {
+					outline: 1px solid;
+					outline-offset: -1px;
+				}
+			}
+			.list {
+				position: absolute;
+				top: 100%;
+				left: 0;
+				background: #fff;
+				border: 1px solid #dedede;
+				width: auto;
+				height: auto;
+				min-width: 160px;
+				padding: 5px 0;
+				z-index: 999;
+				border-radius: 6px;
+				box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+				.item {
+					display: block;
+					padding: 3px 20px;
+					line-height: 18px;
+					color: #333;
+					&:hover {
+						color: @color-headerBrandText;
+						background: @color-headerBackground;
+					}
+				}
 			}
 		}
 	}
@@ -206,6 +272,7 @@ a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 		}
 	}
 	.person {
+		position: relative;
 		height: 100%;
 		margin-right: 30px;
 		button.name {
@@ -224,6 +291,36 @@ a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 				outline: 1px solid;
 				outline-offset: -1px;
 				//background: @color-headerButtonsBackgroundHover;
+			}
+		}
+		.list {
+			position: absolute;
+			top: 100%;
+			right: 0;
+			background: #fff;
+			border: 1px solid #dedede;
+			width: auto;
+			height: auto;
+			min-width: 160px;
+			padding: 5px 0;
+			z-index: 999;
+			border-radius: 6px;
+			box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+			.title {
+				padding: 3px 20px;
+				color: #999;
+				font-weight: 600;
+			}
+			.item {
+				display: block;
+				padding: 3px 20px;
+				line-height: 18px;
+				color: #333;
+				&:hover {
+					color: @color-headerBrandText;
+					background: @color-headerBackground;
+					text-decoration: none;
+				}
 			}
 		}
 	}
@@ -249,10 +346,14 @@ a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 			flex: 1;
 			display: flex;
 			justify-content: space-between;
+			text-align: center;
 			padding: 10px 30px;
-			.layui-btn {
-				line-height: 2.3em;
-				height: auto;
+			.separator {
+				display: inline-block;
+				height: 25px;
+				margin: 0 1em;
+				border-left: 2px solid #ccc;
+				vertical-align:middle;
 			}
 		}
 	}
@@ -266,13 +367,14 @@ a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 		border-right: 1px solid #dedede;
 		background: #F0F0F0;
 		.item {
-			padding: 8px 0;
-			padding-left: 30px;
-			&:hover {
+			&:hover,&.active {
 				color: @color-headerBrandText;
 				background: @color-headerBackground;
 			}
 			a {
+				display: block;
+				padding: 8px 0;
+				padding-left: 30px;
 				color: inherit;
 				&:hover {
 					text-decoration: none;
@@ -290,15 +392,26 @@ a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
 				display: flex;
 				flex-direction: row;
 				align-items: center;
-				margin-right: 1em;
+				margin-right: 1.5em;
 				.label {
 
 				}
 				.inline {
 					width: 190px;
-					margin-left: 1em;
+					margin-left: 0.8em;
 				}
 			}
 		}
+
+
+
+		.layui-form-label {
+			width: 200px;
+		}
+		.layui-input-block {
+			margin-left: 200px;
+		}
+
+
 	}
 }

@@ -64,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$attrItem = '';
 		$attrLabel = '';
 		$attrInput = '';
-		
+
 		foreach ($extra as $key => $value) {
 			switch($key) {
 				case 'item':
@@ -83,7 +83,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			case 'password':
 				$str = '<div class="layui-form-item" '.$attrItem.'><label class="layui-form-label" '.$attrLabel.'>'.$label.'</label><div class="layui-input-block"><input class="layui-input" type="'.$type.'" autocomplete="off" '.$attrLabel.'></div></div>';
 				break;
-		
+
 		 }
 		 return $str;
 	 }
@@ -102,7 +102,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
  // ------------------------------------------------------------------------
 
-if ( ! function_exists('form_input'))
+if ( ! function_exists('form_inputEx'))
 {
 	/**
 	 * Text Input Field
@@ -112,15 +112,15 @@ if ( ! function_exists('form_input'))
 	 * @param	mixed
 	 * @return	string
 	 */
-	function form_input($data = '', $value = '', $extra = '')
+	function form_inputEx($data = '', $value = '', $extra = '')
 	{
 		$defaults = array(
 			'type' => 'text',
 			'name' => is_array($data) ? '' : $data,
-			'value' => $value
-		);
+			'value' => $value,
 
-		return '<input '._parse_form_attributes($data, $defaults)._attributes_to_string($extra)." />\n";
+		);
+		return '<input autocomplete="off" class="layui-input" '._parse_form_attributes($data, $defaults)._attributes_to_string($extra)." />\n";
 	}
 }
 
@@ -328,7 +328,7 @@ if ( ! function_exists('form_dropdown'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('form_checkbox'))
+if ( ! function_exists('form_checkboxEx'))
 {
 	/**
 	 * Checkbox Field
@@ -339,7 +339,7 @@ if ( ! function_exists('form_checkbox'))
 	 * @param	mixed
 	 * @return	string
 	 */
-	function form_checkbox($data = '', $value = '', $checked = FALSE, $extra = '')
+	function form_checkboxEx($data = '', $value = '', $checked = FALSE, $extra = '')
 	{
 		$defaults = array('type' => 'checkbox', 'name' => ( ! is_array($data) ? $data : ''), 'value' => $value);
 
@@ -758,7 +758,7 @@ if ( ! function_exists('set_radio'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('form_error'))
+if ( ! function_exists('form_errorEx'))
 {
 	/**
 	 * Form Error
@@ -771,7 +771,7 @@ if ( ! function_exists('form_error'))
 	 * @param	string
 	 * @return	string
 	 */
-	function form_error($field = '', $prefix = '', $suffix = '')
+	function form_errorEx($field = '', $prefix = '', $suffix = '')
 	{
 		if (FALSE === ($OBJ =& _get_validation_object()))
 		{

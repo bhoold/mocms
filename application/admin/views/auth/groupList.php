@@ -7,9 +7,6 @@
 				<button class="layui-btn layui-btn-primary" data-type="add">新建</button>
 				<button class="layui-btn" data-type="edit">编辑</button>
 				<button class="layui-btn" data-type="del">删除</button>
-				<span class="separator"></span>
-				<button class="layui-btn" data-type="deactivate">停用</button>
-				<button class="layui-btn" data-type="activate">启用</button>
 			</div>
 			<div class="right">
 				<button class="layui-btn" data-type="setup">设置</button>
@@ -41,12 +38,8 @@
 				<?php echo form_hidden('pageSize', $index_pager['pageSize']);?>
 
 				<div class="item">
-					<span class="lable">账号</span>
-					<input class="layui-input inline" type="text" name="filter[username]" autocomplete="off" value="<?php echo $index_filter['username'];?>">
-				</div>
-				<div class="item">
-					<span class="lable"><?php echo lang('index_email_th');?></span>
-					<input class="layui-input inline" type="text" name="filter[email]" autocomplete="off" value="<?php echo $index_filter['email'];?>">
+					<span class="lable">组名称</span>
+					<input class="layui-input inline" type="text" name="filter[name]" autocomplete="off" value="<?php echo $index_filter['name'];?>">
 				</div>
 				<div class="btn-container">
 					<button class="layui-btn" lay-submit lay-filter="search">搜索</button>
@@ -58,48 +51,17 @@
 					<tr>
 					<th lay-data="{type:'checkbox', fixed: 'left'}"></th>
 					<th lay-data="{field:'id', width:80}">ID</th>
-					<!--
-					<th lay-data="{field:'first_name', width:100}"><?php echo lang('index_fname_th');?></th>
-					<th lay-data="{field:'last_name', width:100}"><?php echo lang('index_lname_th');?></th>
-					-->
-					<?php if($identity_column!=='email'):?>
-						<th lay-data="{field:'username', width:200}"><?php echo lang('index_username_th');?></th>
-					<?php endif;?>
-
-					<th lay-data="{field:'email', width:250}"><?php echo lang('index_email_th');?></th>
-					<th lay-data="{field:'group', width:250}"><?php echo lang('index_groups_th');?></th>
-					<th lay-data="{field:'active', width:80}"><?php echo lang('index_status_th');?></th>
+					<th lay-data="{field:'name', width:200}">组名称</th>
+					<th lay-data="{field:'description', width:500}">组描述</th>
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($index_list as $user):?>
+					<?php foreach ($index_list as $item):?>
 					<tr>
 					<td></td>
-					<td><?php echo $user['id'];?></td>
-					<!--
-					<td><?php echo htmlspecialchars($user['first_name'],ENT_QUOTES,'UTF-8');?></td>
-					<td><?php echo htmlspecialchars($user['last_name'],ENT_QUOTES,'UTF-8');?></td>
-					-->
-					<?php if($identity_column!=='email'):?>
-					<td><?php echo htmlspecialchars($user['username'],ENT_QUOTES,'UTF-8');?></td>
-					<?php endif;?>
-
-					<td><?php echo htmlspecialchars($user['email'],ENT_QUOTES,'UTF-8');?></td>
-					<td>
-					<?php foreach ($user['groups'] as $key =>$group):?>
-						<?php
-							$break = ', ';
-							if(count($user['groups']) == $key+1) {
-								$break = '';
-							};
-							echo htmlspecialchars($group->name,ENT_QUOTES,'UTF-8').$break;
-						?>
-					<?php endforeach?>
-					</td>
-					<!--
-					<td><?php echo ($user['active']) ? anchor("auth/deactivate/".$user['id'], '正常') : anchor("auth/activate/". $user['id'], '停用');?></td>
-					-->
-					<td><?php echo ($user['active'])?'正常':'停用'?></td>
+					<td><?php echo $item['id'];?></td>
+					<td><?php echo htmlspecialchars($item['name'],ENT_QUOTES,'UTF-8');?></td>
+					<td><?php echo htmlspecialchars($item['description'],ENT_QUOTES,'UTF-8');?></td>
 					</tr>
 					<?php endforeach;?>
 				</tbody>
@@ -174,13 +136,13 @@ layui.use(['form','table','laypage','layer','alert'], function(){
 
   var active = {
 		add: function() {
-			location.href = "<?php echo getUrl('index','create_user');?>";
+			location.href = "<?php echo getUrl('index','create_group');?>";
 		},
 		edit: function() {
 			var checkStatus = table.checkStatus('listTable');
 			if(checkStatus.data.length){
 				var id = checkStatus.data[0].id;
-				location.href = "<?php echo getUrl('index','edit_user/" + id + "');?>";
+				location.href = "<?php echo getUrl('index','edit_group/" + id + "');?>";
 			}else{
 				layer.msg('请从列表选择数据', {icon: 5, shift: 6});
 			}
@@ -203,43 +165,6 @@ layui.use(['form','table','laypage','layer','alert'], function(){
 				layer.msg('请从列表选择数据', {icon: 5, shift: 6});
 			}
 		},
-		deactivate: function() {
-			var checkStatus = table.checkStatus('listTable');
-			if(checkStatus.data.length){
-				layer.confirm('所选数据将设为停用状态?', function() {
-					var ids = [];
-					layui.each(checkStatus.data, function(index, item){
-						ids.push(item.id);
-					});
-
-					$('#main .list-filter form').prepend('<input type="hidden" name="_action" value="deactivate" /><input type="hidden" name="_action_id" value="'+ids.join(',')+'" />');
-
-					$('#main .list-filter form').data('isSavePage', true);
-					$('#main .list-filter form button[lay-submit]').trigger('click');
-				});
-			}else{
-				layer.msg('请从列表选择数据', {icon: 5, shift: 6});
-			}
-		},
-		activate: function() {
-			var checkStatus = table.checkStatus('listTable');
-			if(checkStatus.data.length){
-				layer.confirm('所选数据将设为启用状态?', function() {
-					var ids = [];
-					layui.each(checkStatus.data, function(index, item){
-						ids.push(item.id);
-					});
-
-					$('#main .list-filter form').prepend('<input type="hidden" name="_action" value="activate" /><input type="hidden" name="_action_id" value="'+ids.join(',')+'" />');
-
-					$('#main .list-filter form').data('isSavePage', true);
-					$('#main .list-filter form button[lay-submit]').trigger('click');
-				});
-			}else{
-				layer.msg('请从列表选择数据', {icon: 5, shift: 6});
-			}
-		},
-
 		setup: function() {
 			location.href = "<?php echo getUrl('index');?>";
 		}

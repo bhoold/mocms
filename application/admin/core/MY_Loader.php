@@ -25,14 +25,21 @@ class MY_Loader extends CI_Loader {
 		 * $view = 'test'; 没有/开头则前面加上控制器名称
 		 */
 		$CI =& get_instance();
-		if($view){
-			if(strpos($view, '/') === 0){//以/开头
-				$view = substr($view, 1);
-			}else{
-				$view = lcfirst($CI->router->class).'/'.$view;
+		if($view) {
+			if(DIRECTORY_SEPARATOR !== '/') {
+				$view = str_replace('/', DIRECTORY_SEPARATOR, $view);
 			}
-		}else{
-			$view = lcfirst($CI->router->class).'/'.$CI->router->method;
+			if(strpos($view, DIRECTORY_SEPARATOR) === 0) {//以/开头
+				$view = substr($view, 1);
+			} else {
+				$view = lcfirst($CI->router->class).DIRECTORY_SEPARATOR.$view;
+			}
+		} else {
+			$view = lcfirst($CI->router->class).DIRECTORY_SEPARATOR.$CI->router->method;
+		}
+
+		if(!$vars) {
+			$vars = $CI->getDisplayData();
 		}
 
 		parent::view($view, $vars, $return);
@@ -44,7 +51,7 @@ class MY_Loader extends CI_Loader {
 	 */
 	public function modelEx($model, $name = '', $db_conn = FALSE)
 	{
-		if(is_string($model) && $name === ''){
+		if(is_string($model) && $name === '') {
 			$model = lcfirst($model);
 		}
 

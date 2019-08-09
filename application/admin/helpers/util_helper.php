@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-07-30 01:37:31
  * @Last Modified by: Raven
- * @Last Modified time: 2019-08-01 23:21:49
+ * @Last Modified time: 2019-08-07 00:14:27
  */
 
 
@@ -51,7 +51,6 @@ if ( !function_exists('getUrl')) {
 }
 
 
-
 if ( ! function_exists('redirectEx'))
 {
 	/**
@@ -74,7 +73,6 @@ if ( ! function_exists('redirectEx'))
 }
 
 
-
 if ( ! function_exists('password'))
 {
 	/**
@@ -86,26 +84,35 @@ if ( ! function_exists('password'))
 }
 
 
-
-
 if ( ! function_exists('getCurUser'))
 {
 	/**
 	 * 获取当前登录用户的信息
 	 */
 	function getCurUser($field = '') {
-		return 22;
+		$loginInfo = array(
+			'identity',
+			'username',
+			'email',
+			'user_id',
+			'old_last_login',
+			'last_check'
+		); //字段
+
 		$CI =& get_instance();
-		$currentUser = $CI->getCurrentUser();
-		if($field){
-			return $currentUser[$field];
-		}else{
-			return $currentUser;
+		$loginInfo = $CI->session->userdata;
+		if($field) {
+			if($loginInfo[$field]) {
+				return $loginInfo[$field];
+			} else {
+				return '';
+			}
+		} else {
+			return $loginInfo;
 		}
+
 	}
 }
-
-
 
 
 if ( ! function_exists('getLibRds'))
@@ -118,4 +125,34 @@ if ( ! function_exists('getLibRds'))
 		$CI->load->library('libRedis');
 		return $CI->myredis->instance();
 	}
+}
+
+
+if ( ! function_exists('setPageMsg'))
+{
+	/**
+	 * 设置页面消息
+	 *
+	 * @return void
+	 */
+	function setPageMsg($msg, $type = 'info') {
+		$CI =& get_instance();
+		$CI->session->set_flashdata('message', $msg);
+	}
+
+}
+
+
+if ( ! function_exists('getPageMsg'))
+{
+	/**
+	 * 获取页面消息
+	 *
+	 * @return void
+	 */
+	function getPageMsg() {
+		$CI =& get_instance();
+		return $CI->session->flashdata('message');
+	}
+
 }

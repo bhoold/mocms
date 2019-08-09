@@ -7,7 +7,22 @@
  */
 class Auth extends CI_Controller
 {
-	public $data = [];
+	public $data = array(
+		'page_title' => '', //当前模块菜单名称
+		'page_message' => '', //页面消息
+
+		'index_leftMenu' => array(),
+		'index_filter' => array(), //列表过滤器数据
+		'index_list' => array(
+			'list' => array(), //列表数据
+			'count' => 0 //总记录数
+		), //列表页列表数据
+		'index_pager' => array(
+			'count' => 0,
+			'pageNum' => 1,
+			'pageSize' => 10
+		)
+	);
 
 	public function __construct()
 	{
@@ -40,21 +55,81 @@ class Auth extends CI_Controller
 		}
 		else
 		{
-			$this->data['title'] = $this->lang->line('index_heading');
+
+			$this->_disposeListAction();
+
+			$pageNum = $this->input->get('pageNum');
+			$pageSize = $this->input->get('pageSize');
+
+			if(!($pageNum > 0)) {
+				$pageNum = $this->data['index_pager']['pageNum'];
+			}
+			if(!($pageSize > 0)) {
+				$pageSize = $this->data['index_pager']['pageSize'];
+			}
+
+			$whereInit = array(
+				'like' => array(
+					'username' => $this->input->get('filter[username]'),
+					'email' => $this->input->get('filter[email]')
+				)
+			);
+			$where = array();
+			$filter = array();
+			foreach($whereInit as $key => $arr) {
+				foreach($arr as $key2 => $val2) {
+					$filter[$key2] = $val2;
+					if(trim($val2) === '' || trim($val2) === null){
+						unset($arr[$key2]);
+					}
+				}
+				if(!empty($arr)){
+					$where[$key] = $arr;
+				}
+			}
+			$result = $this->ion_auth->usersList($where, $pageNum, $pageSize);
+
+			$identity_column = $this->config->item('identity', 'ion_auth');
+			$this->data['identity_column'] = $identity_column;
+
+			$this->data['page_title'] = $this->lang->line('index_heading');
 
 			// set the flash data error message if there is one
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			$this->data['page_message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
 			//list the users
-			$this->data['users'] = $this->ion_auth->users()->result();
+			$this->data['index_list'] = $result['list'];
+
 
 			//USAGE NOTE - you can do more complicated queries like this
 			//$this->data['users'] = $this->ion_auth->where('field', 'value')->users()->result();
 
-			foreach ($this->data['users'] as $k => $user)
+			foreach ($this->data['index_list'] as $k => $user)
 			{
-				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
+				$this->data['index_list'][$k]['groups'] = $this->ion_auth->get_users_groups($user['id'])->result();
 			}
+
+			$this->data['index_pager'] = array(
+				'count' => $result['count'],
+				'pageNum' => $pageNum,
+				'pageSize' => $pageSize
+			);
+
+			$this->data['index_filter'] = $filter;
+
+			$this->data['index_leftMenu'] = array(
+				array(
+					'title' => '用户',
+					'link' => 'auth/index',
+					'active' => $this->router->method == 'index' ? 'active' : ''
+				),
+				array(
+					'title' => '用户组',
+					'link' => 'auth/groupList',
+					'active' => $this->router->method == 'groupList' ? 'active' : ''
+				)
+			);
+
 
 			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'index', $this->data);
 		}
@@ -460,7 +535,7 @@ class Auth extends CI_Controller
 	 */
 	public function create_user()
 	{
-		$this->data['title'] = $this->lang->line('create_user_heading');
+		$this->data['page_title'] = $this->lang->line('create_user_heading');
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
@@ -472,8 +547,8 @@ class Auth extends CI_Controller
 		$this->data['identity_column'] = $identity_column;
 
 		// validate form input
-		$this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'trim|required');
-		$this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'trim|required');
+		//$this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'trim|required');
+		//$this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'trim|required');
 		if ($identity_column !== 'email')
 		{
 			$this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'trim|required|is_unique[' . $tables['users'] . '.' . $identity_column . ']');
@@ -483,8 +558,8 @@ class Auth extends CI_Controller
 		{
 			$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email|is_unique[' . $tables['users'] . '.email]');
 		}
-		$this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
-		$this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim');
+		//$this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
+		//$this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim');
 		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|matches[password_confirm]');
 		$this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
 
@@ -501,12 +576,13 @@ class Auth extends CI_Controller
 				'phone' => $this->input->post('phone'),
 			];
 		}
-		if ($this->form_validation->run() === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data))
+		if ($this->form_validation->run() === TRUE && $id = $this->ion_auth->register($identity, $password, $email, $additional_data))
 		{
 			// check to see if we are creating the user
 			// redirect them back to the admin page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'location');
+			//redirect("auth", 'location');
+			$this->_forward($id);
 		}
 		else
 		{
@@ -590,6 +666,9 @@ class Auth extends CI_Controller
 			redirect('auth', 'location');
 		}
 
+		$identity_column = $this->config->item('identity', 'ion_auth');
+		$this->data['identity_column'] = $identity_column;
+
 		$user = $this->ion_auth->user($id)->row();
 		$groups = $this->ion_auth->groups()->result_array();
 		$currentGroups = $this->ion_auth->get_users_groups($id)->result();
@@ -599,10 +678,10 @@ class Auth extends CI_Controller
 
 
 		// validate form input
-		$this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'trim|required');
-		$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'trim|required');
-		$this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'trim');
-		$this->form_validation->set_rules('company', $this->lang->line('edit_user_validation_company_label'), 'trim');
+		//$this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'trim|required');
+		//$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'trim|required');
+		//$this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'trim');
+		//$this->form_validation->set_rules('company', $this->lang->line('edit_user_validation_company_label'), 'trim');
 
 		if (isset($_POST) && !empty($_POST))
 		{
@@ -615,12 +694,16 @@ class Auth extends CI_Controller
 			// update the password if it was posted
 			if ($this->input->post('password'))
 			{
-				$this->form_validation->set_rules('password', $this->lang->line('edit_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|matches[password_confirm]');
-				$this->form_validation->set_rules('password_confirm', $this->lang->line('edit_user_validation_password_confirm_label'), 'required');
+				$this->form_validation->set_rules('password', $this->lang->line('edit_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']');
+				$this->form_validation->set_rules('password_confirm', $this->lang->line('edit_user_validation_password_confirm_label'), 'required|matches[password]');
+			} else {
+				//只为通过验证
+				$this->form_validation->set_rules('password', $this->lang->line('edit_user_validation_password_label'), 'trim');
 			}
 
 			if ($this->form_validation->run() === TRUE)
 			{
+
 				$data = [
 					'first_name' => $this->input->post('first_name'),
 					'last_name' => $this->input->post('last_name'),
@@ -656,14 +739,15 @@ class Auth extends CI_Controller
 				{
 					// redirect them back to the admin page if admin, or to the base url if non admin
 					$this->session->set_flashdata('message', $this->ion_auth->messages());
-					$this->redirectUser();
+					//$this->redirectUser();
+					$this->_forward($id);
 
 				}
 				else
 				{
 					// redirect them back to the admin page if admin, or to the base url if non admin
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
-					$this->redirectUser();
+					//$this->redirectUser();
 
 				}
 
@@ -705,6 +789,25 @@ class Auth extends CI_Controller
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('phone', $user->phone),
 		];
+
+		if($identity_column!=='email') {
+			$this->data['identity'] = [
+				'name' => 'identity',
+				'id'   => 'identity',
+				'type' => 'text',
+				'disabled' => 'true',
+				'value' => $this->form_validation->set_value('identity', $user->username),
+			];
+		}
+
+		$this->data['email'] = [
+			'name' => 'email',
+			'id'   => 'email',
+			'type' => 'text',
+			'disabled' => 'true',
+			'value' => $this->form_validation->set_value('email', $user->email),
+		];
+
 		$this->data['password'] = [
 			'name' => 'password',
 			'id'   => 'password',
@@ -724,7 +827,7 @@ class Auth extends CI_Controller
 	 */
 	public function create_group()
 	{
-		$this->data['title'] = $this->lang->line('create_group_title');
+		$this->data['page_title'] = $this->lang->line('create_group_title');
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
@@ -732,7 +835,7 @@ class Auth extends CI_Controller
 		}
 
 		// validate form input
-		$this->form_validation->set_rules('group_name', $this->lang->line('create_group_validation_name_label'), 'trim|required|alpha_dash');
+		$this->form_validation->set_rules('group_name', $this->lang->line('create_group_validation_name_label'), 'trim|required');
 
 		if ($this->form_validation->run() === TRUE)
 		{
@@ -742,7 +845,8 @@ class Auth extends CI_Controller
 				// check to see if we are creating the group
 				// redirect them back to the admin page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect("auth", 'location');
+				//redirect("auth", 'location');
+				$this->_forwardGroup($new_group_id);
 			}
 		}
 		else
@@ -781,7 +885,7 @@ class Auth extends CI_Controller
 			redirect('auth', 'location');
 		}
 
-		$this->data['title'] = $this->lang->line('edit_group_title');
+		$this->data['page_title'] = $this->lang->line('edit_group_title');
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
@@ -791,7 +895,7 @@ class Auth extends CI_Controller
 		$group = $this->ion_auth->group($id)->row();
 
 		// validate form input
-		$this->form_validation->set_rules('group_name', $this->lang->line('edit_group_validation_name_label'), 'trim|required|alpha_dash');
+		$this->form_validation->set_rules('group_name', $this->lang->line('edit_group_validation_name_label'), 'trim|required');
 
 		if (isset($_POST) && !empty($_POST))
 		{
@@ -809,7 +913,8 @@ class Auth extends CI_Controller
 				{
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
 				}
-				redirect("auth", 'location');
+				//redirect("auth", 'location');
+				$this->_forwardGroup($id);
 			}
 		}
 
@@ -885,5 +990,316 @@ class Auth extends CI_Controller
 			return $view_html;
 		}
 	}
+
+
+
+
+
+
+
+
+
+
+
+	/**
+	 * 用户组列表
+	 */
+	public function groupList()
+	{
+
+		if (!$this->ion_auth->logged_in())
+		{
+			// redirect them to the login page
+			redirect('auth/login', 'location');
+		}
+		else if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
+		{
+			// redirect them to the home page because they must be an administrator to view this
+			show_error('You must be an administrator to view this page.');
+		}
+		else
+		{
+
+			$this->_disposeGroupListAction();
+
+			$pageNum = $this->input->get('pageNum');
+			$pageSize = $this->input->get('pageSize');
+
+			if(!($pageNum > 0)) {
+				$pageNum = $this->data['index_pager']['pageNum'];
+			}
+			if(!($pageSize > 0)) {
+				$pageSize = $this->data['index_pager']['pageSize'];
+			}
+
+			$whereInit = array(
+				'like' => array(
+					'name' => $this->input->get('filter[name]')
+				)
+			);
+			$where = array();
+			$filter = array();
+			foreach($whereInit as $key => $arr) {
+				foreach($arr as $key2 => $val2) {
+					$filter[$key2] = $val2;
+					if(trim($val2) === '' || trim($val2) === null){
+						unset($arr[$key2]);
+					}
+				}
+				if(!empty($arr)){
+					$where[$key] = $arr;
+				}
+			}
+			$result = $this->ion_auth->groupsList($where, $pageNum, $pageSize);
+
+			$identity_column = $this->config->item('identity', 'ion_auth');
+			$this->data['identity_column'] = $identity_column;
+
+			$this->data['page_title'] = '用户组管理';
+
+			// set the flash data error message if there is one
+			$this->data['page_message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+
+			//list the users
+			$this->data['index_list'] = $result['list'];
+
+
+			$this->data['index_pager'] = array(
+				'count' => $result['count'],
+				'pageNum' => $pageNum,
+				'pageSize' => $pageSize
+			);
+
+			$this->data['index_filter'] = $filter;
+
+			$this->data['index_leftMenu'] = array(
+				array(
+					'title' => '用户',
+					'link' => 'auth/index',
+					'active' => $this->router->method == 'index' ? 'active' : ''
+				),
+				array(
+					'title' => '用户组',
+					'link' => 'auth/groupList',
+					'active' => $this->router->method == 'groupList' ? 'active' : ''
+				)
+			);
+
+
+			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'groupList', $this->data);
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/**
+	 * 处理列表页按钮操作
+	 *
+	 * @return void
+	 */
+	protected function _disposeListAction() {
+
+		$formAction = $this->input->get('_action');
+		if($formAction){
+			$gets = $this->input->get();
+			switch($formAction){
+				case 'delete':
+					if($idsStr = $this->input->get('_action_id')){
+						$this->_delete($idsStr);
+						unset($gets['_action_id']);
+					}
+					break;
+				case 'deactivate':
+					if($idsStr = $this->input->get('_action_id')){
+						$this->_deactivate($idsStr);
+						unset($gets['_action_id']);
+					}
+					break;
+				case 'activate':
+					if($idsStr = $this->input->get('_action_id')){
+						$this->_activate($idsStr);
+						unset($gets['_action_id']);
+					}
+					break;
+			}
+			unset($gets['_action']);
+			if(empty($gets)){
+				redirectEx('index', 'location');
+			}else{
+				redirectEx('index?'.http_build_query($gets), 'location');
+			}
+		}
+	}
+
+	/**
+	 * 处理用户组列表页按钮操作
+	 *
+	 * @return void
+	 */
+	protected function _disposeGroupListAction() {
+
+		$formAction = $this->input->get('_action');
+		if($formAction){
+			$gets = $this->input->get();
+			switch($formAction){
+				case 'delete':
+					if($idsStr = $this->input->get('_action_id')){
+						$this->_deleteGroup($idsStr);
+						unset($gets['_action_id']);
+					}
+					break;
+			}
+			unset($gets['_action']);
+			if(empty($gets)){
+				redirectEx('groupList', 'location');
+			}else{
+				redirectEx('groupList?'.http_build_query($gets), 'location');
+			}
+		}
+	}
+
+	/**
+	 * 删除用户组
+	 *
+	 * @param string $ids 用户组id
+	 * @return void
+	 */
+	protected function _deleteGroup($ids) {
+		//todo: 删除多个用户组
+
+		if(strstr($ids, ',') !== FALSE) {
+			$this->session->set_flashdata('message', '每次只能删除一个');
+			return;
+		}
+
+		if($this->ion_auth->delete_group($ids)) {
+			$this->session->set_flashdata('message', 'ID:' . $ids . ' ' . '删除成功');
+		} else {
+			$this->session->set_flashdata('message', 'ID:' . $ids . ' ' . '删除失败');
+		}
+	}
+
+
+	/**
+	 * 删除用户
+	 *
+	 * @param string $ids 用户id
+	 * @return void
+	 */
+	protected function _delete($ids) {
+		//todo: 删除多个用户
+
+		if(strstr($ids, ',') !== FALSE) {
+			$this->session->set_flashdata('message', '每次只能删除一个');
+			return;
+		}
+
+		$curId = getCurUser('user_id');
+		if($ids == $curId) {
+			$this->session->set_flashdata('message', '不能删除自己');
+			return;
+		}
+
+		if($this->ion_auth->delete_user($ids)) {
+			$this->session->set_flashdata('message', 'ID:' . $ids . ' ' . '删除成功');
+		} else {
+			$this->session->set_flashdata('message', 'ID:' . $ids . ' ' . '删除失败');
+		}
+	}
+
+
+
+	protected function _deactivate($ids) {
+		//todo: 停用多个用户
+
+		if(strstr($ids, ',') !== FALSE) {
+			$this->session->set_flashdata('message', '每次只能停用一个');
+			return;
+		}
+
+		$curId = getCurUser('user_id');
+		if($ids == $curId) {
+			$this->session->set_flashdata('message', '不能停用自己');
+			return;
+		}
+
+		if($this->ion_auth->deactivate($ids)) {
+			$this->session->set_flashdata('message', 'ID:' . $ids . ' ' . '停用成功');
+		} else {
+			$this->session->set_flashdata('message', 'ID:' . $ids . ' ' . '停用失败');
+		}
+	}
+
+
+	protected function _activate($ids) {
+		//todo: 启用多个用户
+
+		if(strstr($ids, ',') !== FALSE) {
+			$this->session->set_flashdata('message', '每次只能启用一个');
+			return;
+		}
+
+		if($this->ion_auth->activate($ids)) {
+			$this->session->set_flashdata('message', 'ID:' . $ids . ' ' . '启用成功');
+		} else {
+			$this->session->set_flashdata('message', 'ID:' . $ids . ' ' . '启用失败');
+		}
+	}
+
+
+
+
+	/**
+	 * 新增和编辑页面成功后跳转
+	 *
+	 * @param integer $id
+	 * @return void
+	 */
+	protected function _forward($id = 0) {
+		$follow_action = $this->input->post('_follow-action');
+		if($follow_action === 'save_new') {
+			redirectEx('create_user', 'location');
+		} elseif($follow_action === 'save_close') {
+			redirectEx('index', 'location');
+		} elseif($id) {
+			redirectEx('edit_user/'.$id, 'location');
+		}
+	}
+
+
+
+	/**
+	 * 新增和编辑页面成功后跳转
+	 *
+	 * @param integer $id
+	 * @return void
+	 */
+	protected function _forwardGroup($id = 0) {
+		$follow_action = $this->input->post('_follow-action');
+		if($follow_action === 'save_new') {
+			redirectEx('create_group', 'location');
+		} elseif($follow_action === 'save_close') {
+			redirectEx('groupList', 'location');
+		} elseif($id) {
+			redirectEx('edit_group/'.$id, 'location');
+		}
+	}
+
+
 
 }
