@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-02 23:56:15
  * @Last Modified by: Raven
- * @Last Modified time: 2019-08-09 11:50:49
+ * @Last Modified time: 2019-08-10 12:43:54
  */
 
 
@@ -129,11 +129,18 @@ class MY_Model extends CI_Model {
 	/**
 	 * 删除记录
 	 *
-	 * @param string $idsStr
+	 * @param string|array $ids
 	 * @return bool
 	 */
-	public function delete($idsStr)
+	public function delete($ids)
 	{
+		$idsStr = '';
+		if(is_array($ids)) {
+			$idsStr = implode(',', $ids);
+		} else {
+			$idsStr = $ids;
+		}
+
 		if(strpos($idsStr, ',')){ //多个id
 			$this->db->where_in('id', explode(',', $idsStr));
 		}else{
