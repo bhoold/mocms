@@ -59,41 +59,7 @@
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">字段</label>
-					<div class="layui-input-block"><!--
-					<table class="layui-hide" id="listTable" lay-size="sm" lay-filter="listTable">
-						<thead>
-							<tr>
-								<th lay-data="{field:'name', width:150, edit:'text'}">字段名称</th>
-								<th lay-data="{field:'type', width:150, edit:'text'}">类型</th>
-								<th lay-data="{field:'value', width:400, edit:'text'}">默认值</th>
-								<th lay-data="{field:'desc', width:200, edit:'text'}">描述</th>
-								<th lay-data="{fixed:'right', toolbar:'#tableOpt', width:150}">操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>id</td>
-								<td>MEDIUMINT(8)</td>
-								<td></td>
-								<td>自增主键</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>createtime</td>
-								<td>TIMESTAMP</td>
-								<td>CURRENT_TIMESTAMP</td>
-								<td>创建时间</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>updatetime</td>
-								<td>TIMESTAMP</td>
-								<td>CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP</td>
-								<td>更新时间</td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>-->
+					<div class="layui-input-block">
 					<table class="layui-hide" id="listTable" lay-size="sm" lay-filter="listTable"></table>
 					</div>
 				</div>
@@ -106,13 +72,6 @@
 			<?php echo form_close(); ?>
 		</div>
 	</div>
-
-	<script type="text/html" id="tableCheckbox">
-				{{# console.log(d)}}
-		{{#  if(!(d.name == 'id' || d.name == 'createtime' || d.name == 'updatetime')){ }}
-		<input type="checkbox" name="" title="写作" lay-skin="primary" checked>
-		{{# } }}
-	</script>
 
 	<script type="text/html" id="tableOpt">
 		<a class="layui-btn layui-btn-primary" lay-event="add">添加</a>
@@ -128,9 +87,12 @@
 				table = layui.table;
 
 			form.on('submit(*)', function(data){
+
 				var data = [];
+				var index = 0;
 				layui.each(table.cache['listTable'], function(i, item){
 					var rowData = {};
+
 					table.eachCols('listTable',function(i,col){
 						if(col.field !== undefined){
 							if(item[col.field] !== undefined){
@@ -140,9 +102,23 @@
 							}
 						}
 					});
+					rowData._rowIndex = index;
+					index++;
 					data.push(rowData);
 				});
-				var dataStr = JSON.stringify(data);console.log(dataStr)
+				var isFieldok = true;
+				layui.each(data, function(i, item){
+					if(item.name == '' || item.type == '') {
+						isFieldok = false;
+						layer.msg('字段未填写完整', {icon: 5, shift: 6});
+						return true;
+					}
+				})
+
+				if(!isFieldok){
+					return false;
+				}
+				var dataStr = JSON.stringify(data);//console.log(dataStr)
 				$('#main #form').prepend('<input type="hidden" name="fields" value=\''+dataStr+'\' />');
 				return true;
 			});
@@ -175,7 +151,13 @@
 					location.href = "<?php echo getUrl('index');?>";
 				}
 			};
-window.t = table;
+
+			var defaultData = [
+					{name: 'id', type: 'MEDIUMINT(8)', value: '', desc: '自增主键', primary: true, auto_increment: true, unsigned: true, notnull: true, unique: true, edit:false, off: true},
+					{name: 'createtime', type: 'TIMESTAMP', value: 'CURRENT_TIMESTAMP', desc: '创建时间', primary: false, auto_increment: false, unsigned: false, notnull: true, unique: false, edit:false, off: true},
+					{name: 'updatetime', type: 'TIMESTAMP', value: 'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP', desc: '更新时间', primary: false, auto_increment: false, unsigned: false, notnull: true, unique: false, edit:false, off: true},
+				];
+			var postData = <?php echo set_value('fields', '\'\'', FALSE); ?>;
 
 			table.render({
 				elem: '#listTable' //指定原始表格元素选择器（推荐id选择器）
@@ -188,31 +170,19 @@ window.t = table;
 					{field:'value', width:400, edit:'text', title: '默认值'},
 					{field:'desc', width:200, edit:'text', title: '描述'},
 
-					{field:'primary', width:80, title: '主键', templet:'<div><input type="checkbox" name="" disabled lay-skin="primary" {{d.primary?\'checked\':\'\'}}></div>'},
-					{field:'unsigned', width:80, title: '无符号', templet:'<div><input type="checkbox" name="" lay-skin="primary" {{d.unsigned?\'checked\':\'\'}}></div>'},
-					{field:'notnull', width:80, title: '非空', templet:'<div><input type="checkbox" name="" lay-skin="primary" {{d.notnull?\'checked\':\'\'}}></div>'},
-					{field:'unique', width:80, title: '唯一值', templet:'<div><input type="checkbox" name="" lay-skin="primary" {{d.unique?\'checked\':\'\'}}></div>'},
-					{field:'auto_increment', width:80, title: '自动递增', templet:'<div><input type="checkbox" name="" lay-skin="primary" {{d.auto_increment?\'checked\':\'\'}}></div>'},
+					{field:'primary', width:80, title: '主键', toolbar:'<div><input type="checkbox" name="primaryCheckbox" lay-filter="tableChoose" disabled lay-skin="primary" {{d.primary?\'checked\':\'\'}}></div>'},
+					{field:'auto_increment', width:80, title: '自动递增', templet:'<div><input type="checkbox" name="auto_incrementCheckbox" lay-filter="tableChoose" disabled lay-skin="primary" {{d.auto_increment?\'checked\':\'\'}}></div>'},
+					{field:'unsigned', width:80, title: '无符号', toolbar:'<div><input type="checkbox" name="unsignedCheckbox" lay-filter="tableChoose" lay-skin="primary" {{d.unsigned?\'checked\':\'\'}}></div>'},
+					{field:'notnull', width:80, title: '非空', toolbar:'<div><input type="checkbox" name="notnullCheckbox" lay-filter="tableChoose" lay-skin="primary" {{d.notnull?\'checked\':\'\'}}></div>'},
+					{field:'unique', width:80, title: '唯一值', toolbar:'<div><input type="checkbox" name="uniqueCheckbox" lay-filter="tableChoose" lay-skin="primary" {{d.unique?\'checked\':\'\'}}></div>'},
 
-					{fixed:'right', toolbar:'#tableOpt', width:150, title: '操作'}
+					{/*fixed:'right', */toolbar:'#tableOpt', width:150, title: '操作'}
 
 				]], //设置表头
-				data: [
-					{name: 'id', type: 'MEDIUMINT(8)', value: '', desc: '自增主键', primary: true, unsigned: true, notnull: true, unique: true, auto_increment: true, edit:false},
-					{name: 'createtime', type: 'TIMESTAMP', value: 'CURRENT_TIMESTAMP', desc: '创建时间', primary: false, unsigned: false, notnull: true, unique: false, auto_increment: false, edit:false},
-					{name: 'updatetime', type: 'TIMESTAMP', value: 'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP', desc: '更新时间', primary: false, unsigned: false, notnull: true, unique: false, auto_increment: false, edit:false},
-
-				],
+				data: postData || defaultData,
 				limit: 1000, //假定值
 				page: false
 			});
-			/*
-			//初始化表格
-			table.init('listTable', {
-				limit: 1000, //假定值
-				page: false
-			});*/
-
 
 			table.on('tool(listTable)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
 				var data = obj.data; //获得当前行数据
@@ -229,14 +199,21 @@ window.t = table;
 					layer.close(index);
 					});*/
 				} else if(layEvent === 'add'){ //编辑
-					obj.add();
+					obj.add({off: true}); //不要选中效果
 				}
 			});
-			table.on('edit(listTable)', function(obj){
-				console.log(obj);
-			});
-			table.on('checkbox(listTable)', function(obj){
-				console.log(obj);
+
+			layui.event('form',"checkbox(tableChoose)",{},function(obj){
+				var $this = $(this),
+					state = $this.is(':checked');
+					field = $this.closest('td').data('field'),
+					index = $this.closest('tr').data('index'),
+					data = table.cache['listTable'];
+				data[index][field] = state;
+
+				table.reload('listTable',{
+					data: data
+				});
 			});
 
 		});

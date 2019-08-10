@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-02 23:52:48
  * @Last Modified by: Raven
- * @Last Modified time: 2019-08-07 02:44:51
+ * @Last Modified time: 2019-08-09 16:01:44
  */
 
 
@@ -139,6 +139,7 @@ class MY_Controller extends CI_Controller {
 				}
 			} else {
 				setPageMsg('数据不存在!', 'error');
+				$this->_data['edit_hideForm'] = TRUE;
 			}
 		} else {
 			setPageMsg('数据不存在!', 'error');

@@ -58,7 +58,20 @@ $config = array(
 			'label' => '字段',
 			'rules' => 'trim|required',
 			'errors' => array('required' => '请输入%s.')
+		)
+	),
+	'tableModel/edit' => array(
+		array(
+			'field' => 'title',
+			'label' => '表名',
+			'rules' => 'trim|required',
+			'errors' => array('required' => '请输入%s.')
 		),
-
+		array(
+			'field' => 'fields',
+			'label' => '字段',
+			'rules' => 'trim|required',
+			'errors' => array('required' => '请输入%s.')
+		)
 	),
 );

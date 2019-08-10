@@ -846,9 +846,10 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
           if(item3.fixed === 'right') tds_fixed_r.push(td);
         });
 
-        trs.push('<tr data-index="'+ i1 +'">'+ tds.join('') + '</tr>');
-        trs_fixed.push('<tr data-index="'+ i1 +'">'+ tds_fixed.join('') + '</tr>');
-        trs_fixed_r.push('<tr data-index="'+ i1 +'">'+ tds_fixed_r.join('') + '</tr>');
+		var attrOff = item1['off'] ? 'data-off="true"' : '';
+        trs.push('<tr data-index="'+ i1 +'" '+attrOff+'>'+ tds.join('') + '</tr>');
+        trs_fixed.push('<tr data-index="'+ i1 +'" '+attrOff+'>'+ tds_fixed.join('') + '</tr>');
+        trs_fixed_r.push('<tr data-index="'+ i1 +'" '+attrOff+'>'+ tds_fixed_r.join('') + '</tr>');
       });
 
       that.layBody.scrollTop(0);
@@ -994,7 +995,11 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
     ,ELEM_CLICK = 'layui-table-click'
     ,tr = that.layBody.find('tr[data-index="'+ index +'"]');
 
-    tr.addClass(ELEM_CLICK).siblings('tr').removeClass(ELEM_CLICK);
+	if(tr.data('off')){
+		tr.removeClass(ELEM_CLICK).siblings('tr').removeClass(ELEM_CLICK);
+	}else{
+		tr.addClass(ELEM_CLICK).siblings('tr').removeClass(ELEM_CLICK);
+	}
   };
 
   //数据排序
@@ -1564,7 +1569,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
     });
 
     //行事件
-    that.layBody.on('mouseenter', 'tr', function(){ //鼠标移入行
+	that.layBody.on('mouseenter', 'tr', function(){ //鼠标移入行
       var othis = $(this)
       ,index = othis.index();
       if(othis.data('off')) return; //不触发事件
