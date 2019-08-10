@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-02 23:52:08
  * @Last Modified by: Raven
- * @Last Modified time: 2019-08-10 12:03:39
+ * @Last Modified time: 2019-08-10 12:48:15
  */
 
 
@@ -23,7 +23,18 @@ class tableModel_model extends MY_Model {
 	}
 
 	/**
-	 * 获取表字段
+	 * 判断表是否存在
+	 *
+	 * @param string $tableName
+	 * @return boolean
+	 */
+	public function isExistTable($tableName)
+	{
+		return $this->db->table_exists($tableName);
+	}
+
+	/**
+	 * 返回表字段
 	 *
 	 * @param string $tableName
 	 * @return array //[字段名称...]
@@ -40,7 +51,7 @@ class tableModel_model extends MY_Model {
 	 * @param string $tableName
 	 * @return boolean
 	 */
-	public function isExistFields($fieldName, $tableName)
+	public function isExistField($fieldName, $tableName)
 	{
 		return $this->db->field_exists($fieldName, $tableName);
 	}
@@ -56,5 +67,35 @@ class tableModel_model extends MY_Model {
 		return $this->db->field_data($tableName);
 	}
 
+	/**
+	 * 删除一个或多个表
+	 *
+	 * @param string|array $tableNames
+	 * @return boolean
+	 */
+	public function delTable($tableNames) {
+		$names = array();
+		if(is_array($tableNames)) {
+			$names = $tableNames;
+		} else {
+			if(strpos($tableNames, ',')) {
+				$names = explode(',', $tableNames);
+			} else {
+				$names[] = $idsStr;
+			}
+		}
 
+		$successArr = array();
+		$failedArr = array();
+		$this->load->dbforge();
+		foreach($names as $tableName) {
+			if($this->dbforge->drop_table($tableName, TRUE)) {
+				$successArr[] = $tableName;
+			} else {
+				$failedArr[] = $tableName;
+			}
+		}
+
+		return count($successArr) === count($tableNames);
+	}
 }

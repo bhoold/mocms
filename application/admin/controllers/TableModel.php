@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-07 12:04:27
  * @Last Modified by: Raven
- * @Last Modified time: 2019-08-10 04:25:45
+ * @Last Modified time: 2019-08-10 12:47:59
  */
 
 
@@ -93,8 +93,6 @@ class TableModel extends MY_Controller {
 		parent::list();
 	}
 
-
-
 	public function add() {
 
 		$this->_data['page_title'] = '数据模型：添加';
@@ -133,8 +131,6 @@ class TableModel extends MY_Controller {
 
 		parent::add();
 	}
-
-
 
 	public function edit($id = 0) {
 		$this->_data['page_title'] = '数据模型：编辑';
@@ -219,6 +215,27 @@ class TableModel extends MY_Controller {
 		parent::edit($id);
 	}
 
+	/**
+	 * 列表页面删除记录
+	 *
+	 * @param string $idsStr
+	 * @return void
+	 */
+	protected function _delete($idsStr) {
+
+		$idArr = explode(',', $idsStr);
+		$tableNameArr = array();
+		foreach ($idArr as $id) {
+			$tableInfo = $this->model->get(array('id' => $id));
+			$tableNameArr[] = $this->modeldbprefix.$tableInfo['title'];
+		}
+
+		if($this->model->delTable($tableNameArr) && $this->model->delete($idArr)){
+			setPageMsg('ID:' . $idsStr . ' ' . '删除成功!', 'success');
+		}else{
+			setPageMsg('ID:' . $idsStr . ' ' . '删除失败!', 'error');
+		}
+	}
 
 	/**
 	 * 处理添加页面的表单数据
@@ -479,7 +496,7 @@ class TableModel extends MY_Controller {
 
 					//先删除字段，防止新增字段和删除字段同名
 					foreach($delFields as $fieldName) {
-						if($this->model->isExistFields($fieldName, $tableName)) {
+						if($this->model->isExistField($fieldName, $tableName)) {
 							$this->dbforge->drop_column($tableName, $fieldName);
 						}
 					}
