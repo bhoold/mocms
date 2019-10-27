@@ -1,0 +1,159 @@
+#body {
+  height: 100vh;
+}
+#page-modal {
+  display: flex;
+  height: 100%;
+}
+#page-modal #selected {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+#page-modal #selected .head {
+  display: flex;
+  align-items: flex-end;
+  height: 37px;
+  padding-bottom: 5px;
+}
+#page-modal #selected .body {
+  flex: 1;
+  padding: 5px;
+  border: 1px dashed #e0e0e0;
+}
+#page-modal #selected .body .mCSB_outside + .mCSB_scrollTools {
+  right: -8px;
+}
+#page-modal #selected .item {
+  position: relative;
+  width: 100px;
+  margin: 2px;
+  padding: 3px;
+  line-height: 1.1em;
+  text-align: center;
+}
+#page-modal #selected .item:hover {
+  background-color: #d0e7f8;
+  outline: 1px solid #d0e7f8;
+}
+#page-modal #selected .item:hover .del {
+  display: block;
+}
+#page-modal #selected .item .cover {
+  max-width: 94px;
+  max-height: 94px;
+  margin-bottom: 5px;
+}
+#page-modal #selected .item .cover img {
+  max-width: 100%;
+  max-height: 94px;
+}
+#page-modal #selected .item .title {
+  word-break: break-all;
+}
+#page-modal #selected .item .del {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  background: #e81123;
+  cursor: pointer;
+}
+#page-modal #selected .item .del:hover {
+  text-decoration: none;
+}
+#page-modal #content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+#page-modal #content .head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+#page-modal #content .body {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #e0e0e0;
+}
+#page-modal #content .body .mCSB_outside + .mCSB_scrollTools {
+  right: -8px;
+}
+#page-modal #content .list {
+  display: flex;
+  flex-wrap: wrap;
+}
+#page-modal #content .list .item {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  min-height: 130px;
+  margin: 2px;
+  padding: 3px;
+  line-height: 1.1em;
+  text-align: center;
+  cursor: pointer;
+}
+#page-modal #content .list .item.clicked {
+  background-color: #a9d3f2;
+}
+#page-modal #content .list .item:hover {
+  background-color: #d0e7f8;
+  outline: 1px solid #d0e7f8;
+}
+#page-modal #content .list .item .cover {
+  width: 94px;
+  height: 94px;
+  margin-bottom: 5px;
+  line-height: 94px;
+}
+#page-modal #content .list .item .cover img {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: bottom;
+}
+#page-modal #content .list .item .title {
+  word-break: break-all;
+}
+#page-modal #content .list .item .mask {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding-top: 50%;
+  line-height: 2em;
+}
+#page-modal #content .list .item .mask p.btn {
+  display: none;
+}
+#page-modal #content .list .item.uploading .mask {
+  display: block;
+}
+#page-modal #content .list .item.uploaded .mask {
+  display: block;
+}
+#page-modal #content .list .item.uploaded .mask p.btn {
+  display: block;
+}
+#page-modal #content .tip {
+  margin: 1em;
+  text-align: center;
+}
+#page-modal-progress {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: #fff;
+}

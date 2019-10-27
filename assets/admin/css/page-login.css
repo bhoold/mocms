@@ -1,0 +1,39 @@
+body {
+  background: url("../images/loginbackground.jpg") no-repeat #a19f9d;
+}
+.block.login {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 440px;
+  min-height: 338px;
+  margin-bottom: 28px;
+  padding: 44px;
+  background: #ffffff;
+  transform: translate(-50%, -50%);
+}
+.block.login h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+}
+.block.login #infoMessage {
+  color: #e81123;
+}
+.block.login .layui-form-item {
+  margin-bottom: 5px;
+}
+.block.login .layui-form-label {
+  display: none;
+}
+.block.login .layui-input-block {
+  margin-left: 0;
+}
+.block.login .layui-input {
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-radius: 0;
+}
+.block.login .forgot_password {
+  margin-bottom: 1em;
+}

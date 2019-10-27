@@ -1,0 +1,66 @@
+html #layuicss-layregion{display: none; position: absolute; width: 1989px;}
+
+/* 初始化 */
+.layui-layregion *{margin: 0; padding: 0;}
+
+/* 主体结构 */
+.layui-layregion, .layui-layregion *{box-sizing: border-box;}
+.layui-layregion{position: absolute; z-index: 66666666; margin: 5px 0; border-radius: 2px; font-size: 14px; -webkit-animation-duration: 0.3s; animation-duration: 0.3s; -webkit-animation-fill-mode: both; animation-fill-mode: both;}
+
+@-webkit-keyframes layregion-upbit{ /* 微微往上滑入 */
+	from {-webkit-transform: translate3d(0, 20px, 0); opacity: 0.3;}
+	to {-webkit-transform: translate3d(0, 0, 0);  opacity: 1;}
+}
+@keyframes layregion-upbit{
+	from {transform: translate3d(0, 20px, 0);  opacity: 0.3;}
+	to {transform: translate3d(0, 0, 0);  opacity: 1;}
+}
+.layui-layregion{-webkit-animation-name: layregion-upbit; animation-name: layregion-upbit;}
+.layui-layregion-static{ position: relative; z-index: 0; display: inline-block; margin: 0; -webkit-animation: none; animation: none;}
+
+
+
+/* 提示 */
+.layui-layregion-hint{position: absolute; top: 115px; left: 50%; width: 250px; margin-left: -125px; line-height: 20px; padding: 15px; text-align: center; font-size: 12px; color: #FF5722;}
+
+/* 默认简约主题 */
+.layui-layregion, .layui-layregion-hint{border: 1px solid #d2d2d2; box-shadow: 0 2px 4px rgba(0,0,0,.12); background-color: #fff; color: #666;}
+.layui-layregion-hint{color: #FF5722;}
+.layui-layregion{
+	padding: 15px;
+}
+.layui-layregion-main{
+	max-width: 600px;
+}
+.layui-layregion-header ul{
+	height: 28px;
+	border-bottom: 1px solid #0078d4;
+}
+.layui-layregion-header li{
+	display: inline-block;
+	padding: 0 5px;
+	border: 1px solid #e2e2e2;
+	border-bottom-color: #0078d4;
+	cursor: pointer;
+}
+.layui-layregion-header li.active{
+	border-color: #0078d4;
+	border-bottom: 1px solid #fff;
+}
+.layui-layregion-header li span{
+	margin: 5px;
+}
+
+.layui-layregion-content{
+	padding: 15px;
+}
+.layui-layregion-content li{
+	display: inline-block;
+	width: 8em;
+}
+.layui-layregion-content li span{
+	cursor: pointer;
+}
+.layui-layregion-content li span:hover{
+	color: #0078d4;
+}

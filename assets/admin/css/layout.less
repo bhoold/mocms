@@ -1,0 +1,553 @@
+@import "_var";
+
+
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+*:before,*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.text-right {
+	text-align: right;
+}
+.text-center {
+    text-align: center
+}
+
+.text-justify {
+    text-align: justify
+}
+
+.text-nowrap {
+    white-space: nowrap
+}
+
+.text-lowercase {
+    text-transform: lowercase
+}
+
+.text-uppercase {
+    text-transform: uppercase
+}
+
+.text-capitalize {
+    text-transform: capitalize
+}
+
+
+
+
+a {
+    color: @color-black;
+    text-decoration: none;
+}
+
+a:link {
+    color: @color-themePrimary;
+}
+
+a:visited {
+    color: @color-themePrimary;
+}
+
+a:hover {
+	color: @color-black;
+	text-decoration: underline;
+}
+
+a:focus {
+    color: @color-themePrimary;
+}
+
+a:active {
+    color: @color-black;
+}
+
+
+
+html, body {
+	height: 100%;
+}
+
+body {
+	font-size: 14px;
+	line-height: 1.75em;
+	font-family: "Segoe UI Webfont",-apple-system,"Helvetica Neue","Lucida Grande","Roboto","Ebrima","Nirmala UI","Gadugi","Segoe Xbox Symbol","Segoe UI Symbol","Meiryo UI","Khmer UI","Tunga","Lao UI","Raavi","Iskoola Pota","Latha","Leelawadee","Microsoft YaHei UI","Microsoft JhengHei UI","Malgun Gothic","Estrangelo Edessa","Microsoft Himalaya","Microsoft New Tai Lue","Microsoft PhagsPa","Microsoft Tai Le","Microsoft Yi Baiti","Mongolian Baiti","MV Boli","Myanmar Text","Cambria Math";
+	color: @color-black;
+}
+
+
+/* 按钮容 */
+a.layui-btn, .layui-btn{
+	background-color: @color-neutralQuaternaryAlt;
+	color: @color-neutralPrimary;
+	height: auto;
+	line-height: 32px;
+	&.layui-btn-xs{
+		height: 22px;
+    	line-height: 22px;
+	}
+}
+a.layui-btn:hover, .layui-btn:hover{color: @color-neutralDark; text-decoration: none;}
+a.layui-btn:active, .layui-btn:active{color: @color-neutralDark;}
+
+/* 原始 */a.layui-btn-primary, .layui-btn-primary{border-width:0; border-color: @color-themePrimary; background-color: @color-themePrimary; color: @color-white;}
+a.layui-btn-primary:hover, .layui-btn-primary:hover{border-color: @color-themeDarkAlt; color: @color-white; text-decoration: none;}
+a.layui-btn-primary:active, .layui-btn-primary:active{color: @color-white;}
+/* 百搭 */a.layui-btn-normal, .layui-btn-normal{background-color: @color-neutralQuaternaryAlt;}
+/* 禁用 */.layui-btn-disabled,.layui-btn-disabled:hover,.layui-btn-disabled:active{border: 1px solid @color-neutralLighter; background-color: @color-neutralLighter; color: @color-neutralQuaternary;}
+
+/* 警告 */a.layui-btn-danger, .layui-btn-danger{background-color: @color-red;color: @color-white;}
+a.layui-btn-danger:hover, .layui-btn-danger:hover{color: @color-white;}
+
+.layui-btn-group .layui-btn{border-left: 1px solid @color-neutralQuaternaryAlt;}
+.layui-btn-group .layui-btn-primary:hover{border-color: @color-themeDarkAlt; color: @color-white;}
+.layui-btn-group .layui-btn-primary:first-child{border-left: 1px solid @color-themePrimary;}
+
+
+
+/* 表单 */
+.layui-input, .layui-textarea, .layui-select{
+	height: 32px;
+}
+
+
+/* 复选框 */
+.layui-form-checked, .layui-form-checked:hover{border-color: @color-themePrimary;}
+.layui-form-checked span, .layui-form-checked:hover span{background-color: @color-themePrimary;}
+.layui-form-checkbox i{height: 30px;}
+.layui-form-checked i, .layui-form-checked:hover i{color: @color-themePrimary;}
+
+
+
+/* 复选框-原始风格 */
+.layui-form-checked[lay-skin="primary"] span, .layui-form-checked[lay-skin="primary"]:hover span{background-color: inherit;}
+.layui-form-checkbox[lay-skin="primary"]:hover i{border-color: @color-themePrimary; color: @color-white;}
+.layui-form-checked[lay-skin="primary"] i{border-color: @color-themePrimary !important; background-color: @color-themePrimary; color: @color-white;}
+
+/* 复选框-开关风格 */
+.layui-form-onswitch{border-color: @color-themePrimary; background-color: @color-themePrimary;}
+
+
+/* 单选框 */
+.layui-form-radioed>i,.layui-form-radio>i:hover{color: @color-themePrimary;}
+
+/* 开关 */
+.layui-form-switch i{
+	top: 2px;
+}
+
+/* 下拉选择 */
+.layui-form-select dl dd.layui-this{
+	background-color: @color-themePrimary;
+}
+
+
+/* 日历 */
+.layui-laydate .layui-laydate-main .layui-this{
+	background-color: @color-themePrimary !important;
+}
+.layui-laydate .layui-laydate-content tr td.laydate-selected{
+	background-color: @color-themeTertiary;
+}
+.layui-laydate .layui-laydate-content tr td.laydate-selected:hover{
+	background-color: @color-themePrimary !important;
+}
+.layui-laydate .layui-laydate-header i:hover, .layui-laydate .layui-laydate-header span:hover{
+	color: @color-themePrimary;
+}
+.layui-laydate .layui-laydate-footer span:hover{
+	color: @color-themePrimary;
+}
+
+/** 穿梭框 **/
+.layui-transfer-active .layui-btn{background-color: @color-themePrimary; border-color: @color-themePrimary;}
+.layui-transfer-active .layui-btn-disabled{
+    background-color: @color-neutralLighter;
+    border-color: @color-neutralLighter;
+}
+
+
+
+
+
+
+
+/** 分页 **/
+.layui-laypage a{
+	color: @color-black;
+}
+.layui-laypage a:hover{color: @color-themePrimary;text-decoration: none;}
+.layui-laypage .layui-laypage-curr .layui-laypage-em{background-color: @color-themePrimary;}
+.layui-laypage input:focus,
+.layui-laypage select:focus{border-color: @color-themePrimary!important;}
+
+
+
+/* 表格 */
+.layui-table-view {
+	.layui-table-edit{
+		height: 30px;
+		line-height: 30px;
+	}
+	.layui-table-edit:focus{border-color: @color-themePrimary!important;}
+
+	.layui-table-cell {
+		.layui-btn {
+			height: 22px;
+			line-height: 22px;
+			padding: 0 5px;
+			font-size: 12px;
+		}
+		.layui-form-checkbox[lay-skin="primary"] {
+			margin-top: 0;
+		}
+	}
+}
+
+
+
+/* 弹框 */
+.layui-layer {
+	.layui-layer-title {
+		font-size: 20px;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	//height: 50px;
+	//color: @color-headerBrandText;
+	//background: @color-headerBackground;
+	height: 30px;
+	color: @color-neutralQuaternary;
+	background: @color-neutralPrimary;
+	.logo {
+		//margin: 0 1em;
+		//font-size: @fontsize-logo;
+		margin: 0 30px;
+		font-size: 14px;
+		a {
+			//color: @color-headerBrandText;
+			color: @color-neutralQuaternary;
+			text-decoration: none;
+		}
+	}
+	.list {
+		position: absolute;
+		background: @color-white;
+		border: 1px solid @color-neutralLighter;
+		width: auto;
+		height: auto;
+		min-width: 160px;
+		padding: 5px 0;
+		z-index: 999;
+			/* border-radius: 6px; */
+		box-shadow: 0 5px 10px @color-blackTranslucent10;
+	}
+	.nav {
+		flex: 1;
+		display: flex;
+		a {
+			text-decoration: none;
+		}
+		.item {
+			position: relative;
+		}
+		.item.level1 {
+			&>a {
+				color: @color-neutralQuaternary;
+				cursor: pointer;
+				&:hover {
+					color: @color-white;
+					text-decoration: none;
+				}
+			}
+			&>a {
+				display: block;
+				padding: 0 10px;
+				line-height: 30px;
+				&:focus {
+					outline: 1px solid;
+					outline-offset: -1px;
+				}
+			}
+			.list.level1 {
+				top: 100%;
+				left: 0;
+				.item.level2 {
+					&>a{
+						display: block;
+						padding: 3px 20px;
+						line-height: 18px;
+						color: @color-neutralPrimary;
+						&:hover {
+							color: @color-headerBrandText;
+							background: @color-headerBackground;
+						}
+					}
+					.list.level2 {
+						top: -6px;
+						left: calc(100% - 1px);
+						.item.level3 {
+							&>a{
+								display: block;
+								padding: 3px 20px;
+								line-height: 18px;
+								color: @color-neutralPrimary;
+								&:hover {
+									color: @color-headerBrandText;
+									background: @color-headerBackground;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.icon-container {
+		height: 100%;
+		button {
+			float: left;
+			margin: 0;
+			height: inherit;
+			color: @color-headerTextIcons;
+			background: @color-headerButtonsBackground;
+			&:hover {
+				background: @color-headerButtonsBackgroundHover;
+			}
+			&:focus {
+				outline: 1px solid;
+				outline-offset: -1px;
+				background: @color-headerButtonsBackgroundHover;
+			}
+			i {
+				font-size: @fontsize-big;
+			}
+		}
+	}
+	.person {
+		position: relative;
+		height: 100%;
+		margin-right: 30px;
+		button.name {
+			height: inherit;
+			//color: @color-headerTextIcons;
+			//background: @color-headerButtonsBackground;
+			color: @color-neutralQuaternary;
+			background: @color-neutralPrimary;
+			line-height: 30px;
+			&:hover {
+				//background: @color-headerButtonsBackgroundHover;
+				color: @color-white;
+				text-decoration: underline;
+			}
+			&:focus {
+				outline: 1px solid;
+				outline-offset: -1px;
+				//background: @color-headerButtonsBackgroundHover;
+			}
+		}
+		.list {
+			top: 100%;
+			right: 0;
+			.title {
+				padding: 3px 20px;
+				color: #999;
+				font-weight: 600;
+			}
+			.item {
+				display: block;
+				padding: 3px 20px;
+				line-height: 18px;
+				color: #333;
+				&:hover {
+					color: @color-headerBrandText;
+					background: @color-headerBackground;
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+#body {
+	display: flex;
+    flex-direction: column;
+	min-height: calc(~"100% - 30px");
+	#page-header {
+		display: flex;
+		background: #F0F0F0;
+		border-bottom: 1px solid #dedede;
+		.title {
+			min-width: 200px;
+			padding: 15px 30px;
+			font-size: 20px;
+		}
+		.tooles {
+			flex: 1;
+			display: flex;
+			justify-content: space-between;
+			text-align: center;
+			padding: 10px 30px;
+			.separator {
+				display: inline-block;
+				height: 25px;
+				margin: 0 1em;
+				border-left: 2px solid #ccc;
+				vertical-align:middle;
+			}
+		}
+	}
+	#page-content {
+		flex: 1;
+		display: flex;
+	}
+	#left-menu {
+		width: 200px;
+		padding: 30px 10px;
+		border-bottom: 1px solid #dedede;
+		border-right: 1px solid #dedede;
+		background: #F0F0F0;
+		.item {
+			position: relative;
+			&:hover {
+				color: @color-headerBrandText;
+				background: @color-themeTertiary;
+				/* &::before {
+					display: block;
+				} */
+			}
+			&.active {
+				color: @color-headerBrandText;
+				background: @color-themePrimary;
+				&::before {
+					display: block;
+				}
+			}
+			/* &::before {
+				display: none;
+				content: "";
+				position: absolute;
+				width: 3px;
+				height: 100%;
+				background: @color-themePrimary;
+			} */
+			a {
+				display: block;
+				padding: 8px 0;
+				padding-left: 30px;
+				color: inherit;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+	#main {
+		flex: 1;
+		padding: 30px;
+		width: calc(100% - 200px);
+		.list-filter {
+			.item {
+				float: left;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				margin-right: 1.5em;
+				.label {
+
+				}
+				.inline {
+					width: 190px;
+					margin-left: 0.8em;
+				}
+			}
+		}
+
+
+
+		.layui-form-label {
+			width: 200px;
+		}
+		.layui-input-block {
+			margin-left: 200px;
+		}
+
+		.layui-upload {
+			&>.tip {
+				margin-left: 1em;
+			}
+			.layui-upload-list {
+				display: flex;
+				flex-wrap: wrap;
+				padding: 5px;
+				min-height: 130px;
+				border: 1px dashed #e0e0e0;
+				&.image {
+					.item {
+						position: relative;
+						display: inline-block;
+						width: 100px;
+						min-height: 130px;
+						margin: 2px;
+						padding: 3px;
+						line-height: 1.1em;
+						text-align: center;
+						cursor: pointer;
+						&.clicked {
+							background-color: #a9d3f2;
+						}
+						&:hover {
+							background-color: #d0e7f8;
+							outline: 1px solid #d0e7f8;
+						}
+						.cover {
+							width: 94px;
+							height: 94px;
+							margin-bottom: 5px;
+							line-height: 94px;
+							img {
+								max-width: 100%;
+								max-height: 100%;
+								vertical-align: bottom;
+							}
+						}
+						.title {
+							word-break: break-all;
+						}
+					}
+				}
+			}
+		}
+
+	}
+}
