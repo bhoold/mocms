@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 -->
 <div id="infoMessage"><?php echo $message;?></div>
 
-<?php echo form_open('auth/login', array('id'=>'form','class'=>'layui-form','lay-filter'=>'form')); ?>
+<?php echo form_open($formUrl, array('id'=>'form','class'=>'layui-form','lay-filter'=>'form')); ?>
 
 <div class="layui-form-item">
 	<label class="layui-form-label" for="identity"><?php echo lang('login_identity_label');?></label>

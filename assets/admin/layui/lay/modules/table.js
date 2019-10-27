@@ -1634,22 +1634,35 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
 
     //单元格单击事件
     that.layBody.on('click', 'td', function(e){
-      var othis = $(this)
-      ,field = othis.data('field')
-      ,editType = othis.data('edit')
-      ,elemCell = othis.children(ELEM_CELL);
+		var othis = $(this)
+		,field = othis.data('field')
+		,editType = othis.data('edit')
+		,elemCell = othis.children(ELEM_CELL);
 
-      if(othis.data('off')) return; //不触发事件
+		if(othis.data('off')) return; //不触发事件
 
-      //显示编辑表单
-      if(editType){
-        var input = $('<input class="layui-input '+ ELEM_EDIT +'">');
-        input[0].value = othis.data('content') || elemCell.text();
-        othis.find('.'+ELEM_EDIT)[0] || othis.append(input);
-        input.focus();
-        layui.stope(e);
-        return;
-      }
+		//显示编辑表单
+		if(editType){
+			switch (editType) {
+				case 'select':
+					var $form = $('<form class="layui-form" lay-filter="in-table"></form');
+					var input = $('<select name="city" lay-verify="required" class="layui-select '+ ELEM_EDIT +'"><option value=""></option><option value="0">北京</option><option value="1">上海</option></select>');
+					//input[0].value = othis.data('content') || elemCell.text();
+					$form.append(input);
+					othis.find('.'+ELEM_EDIT)[0] || othis.append($form);
+					form.render('select', 'in-table');
+					input.focus();
+					layui.stope(e);
+					break;
+				default:
+					var input = $('<input class="layui-input '+ ELEM_EDIT +'">');
+					input[0].value = othis.data('content') || elemCell.text();
+					othis.find('.'+ELEM_EDIT)[0] || othis.append(input);
+					input.focus();
+					layui.stope(e);
+			}
+		return;
+		}
     }).on('mouseenter', 'td', function(){
       gridExpand.call(this)
     }).on('mouseleave', 'td', function(){

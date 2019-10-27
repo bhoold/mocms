@@ -68,7 +68,7 @@
 
 					<th lay-data="{field:'email', width:250}"><?php echo lang('index_email_th');?></th>
 					<th lay-data="{field:'group', width:250}"><?php echo lang('index_groups_th');?></th>
-					<th lay-data="{field:'active', width:80}"><?php echo lang('index_status_th');?></th>
+					<th lay-data="{field:'active', minwidth:80}"><?php echo lang('index_status_th');?></th>
 					</tr>
 				</thead>
 				<tbody>

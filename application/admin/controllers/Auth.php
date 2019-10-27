@@ -146,6 +146,7 @@ class Auth extends CI_Controller
 		$this->form_validation->set_rules('identity', str_replace(':', '', $this->lang->line('login_identity_label')), 'required');
 		$this->form_validation->set_rules('password', str_replace(':', '', $this->lang->line('login_password_label')), 'required');
 
+		$redirectUrl = $this->input->get('redirect');
 		if ($this->form_validation->run() === TRUE)
 		{
 			// check to see if the user is logging in
@@ -157,7 +158,11 @@ class Auth extends CI_Controller
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'location');
+
+				if(!$redirectUrl) {
+					$redirectUrl = '/';
+				}
+				redirect($redirectUrl, 'location');
 				return;
 			}
 			else
@@ -185,6 +190,13 @@ class Auth extends CI_Controller
 				'type' => 'password',
 			];
 
+			if($redirectUrl) {
+				$this->data['formUrl'] = current_url().'?redirect='.$redirectUrl;
+			} else {
+				$this->data['formUrl'] = current_url();
+			}
+
+
 			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'login', $this->data);
 	}
 
@@ -200,7 +212,7 @@ class Auth extends CI_Controller
 
 		// redirect them to the login page
 		$this->session->set_flashdata('message', $this->ion_auth->messages());
-		redirect('auth/login', 'location');
+		redirect('auth' . DIRECTORY_SEPARATOR . 'login', 'location');
 	}
 
 	/**

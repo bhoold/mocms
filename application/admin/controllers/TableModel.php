@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-07 12:04:27
  * @Last Modified by: Raven
- * @Last Modified time: 2019-08-10 12:47:59
+ * @Last Modified time: 2019-08-12 19:03:23
  */
 
 
@@ -133,6 +133,9 @@ class TableModel extends MY_Controller {
 	}
 
 	public function edit($id = 0) {
+		if($id === 0) {
+			return FALSE;
+		}
 		$this->_data['page_title'] = '数据模型：编辑';
 
 		$this->_data['tooles_btns'] = array(
@@ -527,5 +530,81 @@ class TableModel extends MY_Controller {
 			}
 		}
 	}
+
+
+
+
+
+
+	public function modalList() {
+
+		$this->_data['index_filter'] = array(
+			array(
+				'pattern' => 'like', //where,like
+				'label' => '表名',
+				'name' => 'title',
+				'value' => '',
+				//'operator' => '='
+			)
+		);
+
+		$this->_data['index_tableField'] = array(
+			array(
+				'text' => '表名',
+				'field' => 'title',
+				'width' => '150'
+			),
+			array(
+				'text' => '描述',
+				'field' => 'desc',
+				'minWidth' => '200'
+			)
+		);
+
+		$this->_disposePager();
+		$this->_disposeFilter();
+		$this->_disposeTable();
+
+		$this->load->viewEx();
+	}
+
+
+	public function modalFieldList($id = 0) {
+		if($id === 0) {
+			return FALSE;
+		}
+		$tableInfo = $this->model->get(array('id' => $id));
+		$recordingFields = json_decode($tableInfo['fields'], TRUE);
+		//print_r($recordingFields);
+		$fields = array();
+		foreach($recordingFields as $field) {
+			$fields[] = array(
+				'title' => $field['name'],
+				'desc' => $field['desc']
+			);
+
+		}
+		$this->_data['index_tableField'] = array(
+			array(
+				'type' => 'checkbox',
+				'fixed' => 'left'
+			),
+			array(
+				'title' => '字段',
+				'field' => 'title',
+				'width' => '200'
+			),
+			array(
+				'title' => '描述',
+				'field' => 'desc',
+				'minWidth' => '200'
+			)
+		);
+
+		$this->_data['index_list'] = $fields;
+
+		$this->load->viewEx();
+	}
+
 
 }

@@ -167,6 +167,19 @@ a.layui-btn-danger:hover,
 .layui-form-radio > i:hover {
   color: #0078d4;
 }
+/* 下拉选择 */
+.layui-form-select dl dd.layui-this {
+  background-color: #0078d4;
+}
+/** 穿梭框 **/
+.layui-transfer-active .layui-btn {
+  background-color: #0078d4;
+  border-color: #0078d4;
+}
+.layui-transfer-active .layui-btn-disabled {
+  background-color: #FBFBFB;
+  border-color: #e6e6e6;
+}
 /** 分页 **/
 .layui-laypage a {
   color: #000000;

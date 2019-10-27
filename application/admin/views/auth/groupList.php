@@ -52,7 +52,7 @@
 					<th lay-data="{type:'checkbox', fixed: 'left'}"></th>
 					<th lay-data="{field:'id', width:80}">ID</th>
 					<th lay-data="{field:'name', width:200}">组名称</th>
-					<th lay-data="{field:'description', width:500}">组描述</th>
+					<th lay-data="{field:'description', minwidth:500}">组描述</th>
 					</tr>
 				</thead>
 				<tbody>

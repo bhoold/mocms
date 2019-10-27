@@ -57,8 +57,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<a>内容</a>
 			<div class="list layui-hide">
 				<a class="item" href="<?php echo getUrl('index','/tableModel/index');?>">数据模型</a>
-				<a class="item" href="">功能模块</a>
-				<a class="item" href="">页面模板</a>
+				<a class="item" href="<?php echo getUrl('index','/viewTemplet/index');?>">页面模板</a>
+				<a class="item" href="<?php echo getUrl('index','/module/index');?>">功能模块</a>
 			</div>
 		</div>
 		<div class="item">

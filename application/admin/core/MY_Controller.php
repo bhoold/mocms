@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-02 23:52:48
  * @Last Modified by: Raven
- * @Last Modified time: 2019-08-09 16:01:44
+ * @Last Modified time: 2019-08-12 11:32:41
  */
 
 
@@ -60,7 +60,7 @@ class MY_Controller extends CI_Controller {
 
 		if (!$this->ion_auth->logged_in())
 		{
-			redirectEx('/auth/login', 'location');
+			redirectEx('/auth/login?redirect='.current_url(), 'location');
 		}
 
 		if(file_exists(APPPATH.'models'.DIRECTORY_SEPARATOR.$this->router->class.'_model.php')) {
