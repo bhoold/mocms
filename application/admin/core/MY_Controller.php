@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-02 23:52:48
  * @Last Modified by: Raven
- * @Last Modified time: 2019-10-31 20:33:13
+ * @Last Modified time: 2019-10-31 21:37:23
  */
 
 
@@ -307,7 +307,7 @@ class MY_Controller extends CI_Controller {
 	 * @return void
 	 */
 	protected function _disposeTable() {
-		if($this->_model && $this->_data['index_field'] && $this->_data['index_pager']){
+		if($this->_model && $this->_data['index_field'] !== false && $this->_data['index_pager'] !== false){
 			$result = $this->_model->list($this->_indexFilterQuery, $this->_data['index_pager']['pageNum'], $this->_data['index_pager']['pageSize']);
 
 			$this->_data['index_list'] = $result['list'];

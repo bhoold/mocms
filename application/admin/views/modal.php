@@ -26,7 +26,7 @@
 					}
 					?>
 				</div>
-				<div class="tip">加载中...</div>
+				<div class="tip"><?php if(!count($index_list)){echo '未上传图片';}else{echo '加载中...';}?></div>
 			</div>
 		</div>
 	</div>
