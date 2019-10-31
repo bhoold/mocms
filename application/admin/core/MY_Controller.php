@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-02 23:52:48
  * @Last Modified by: Raven
- * @Last Modified time: 2019-09-28 13:08:33
+ * @Last Modified time: 2019-10-31 20:33:13
  */
 
 
@@ -115,13 +115,20 @@ class MY_Controller extends CI_Controller {
 				if(isset($config[$key])) {
 					$this->_data[$key] = $config[$key];
 				} else {
-					$this->_data[$key] = $this->router->class.DIRECTORY_SEPARATOR.$this->router->method;
+					$this->_data[$key] = $value;
+					//$this->_data[$key] = $this->router->class.DIRECTORY_SEPARATOR.$this->router->method;
 				}
 			} else if($key === 'page_menu') {
 				if(isset($config[$key])) {
 					$this->_data[$key] = $config[$key];
 				} else {
 					$this->_data[$key] = $menu;
+				}
+			} else if($key === 'page_title') {
+				if(isset($config[$key])) {
+					$this->_data[$key] = $config[$key];
+				} else {
+					$this->_data[$key] = getMenuName($this->router->class.'/'.$this->router->method);
 				}
 			} else if($key === 'index_pager') {
 				if(isset($config[$key])) {
@@ -139,7 +146,6 @@ class MY_Controller extends CI_Controller {
 				$this->_data[$key] = $value;
 			}
 		}
-
 	}
 
 	/**
@@ -232,7 +238,7 @@ class MY_Controller extends CI_Controller {
 		$formAction = $this->input->get('_action');
 		if($formAction){
 			$gets = $this->input->get();
-			switch($formAction){
+			switch($formAction){ //定义所有操作
 				case 'delete':
 					if($delIds = $this->input->get('_action_id')){
 						$this->_delete($delIds);
@@ -255,14 +261,16 @@ class MY_Controller extends CI_Controller {
 	 * @return void
 	 */
 	protected function _disposePager() {
-		$pageNum = $this->input->get('pageNum');
-		$pageSize = $this->input->get('pageSize');
+		if($this->_data['index_pager']){
+			$pageNum = $this->input->get('pageNum');
+			$pageSize = $this->input->get('pageSize');
 
-		if($pageNum > 0) {
-			$this->_data['index_pager']['pageNum'] = $pageNum;
-		}
-		if($pageSize > 0) {
-			 $this->_data['index_pager']['pageSize'] = $pageSize;
+			if($pageNum > 0) {
+				$this->_data['index_pager']['pageNum'] = $pageNum;
+			}
+			if($pageSize > 0) {
+				 $this->_data['index_pager']['pageSize'] = $pageSize;
+			}
 		}
 	}
 
@@ -272,23 +280,25 @@ class MY_Controller extends CI_Controller {
 	 * @return void
 	 */
 	protected function _disposeFilter() {
-		$query = array();
-		foreach($this->_data['index_filter'] as &$item) {
-			$value = $this->input->get('filter['.$item['name'].']');
-			$item['value'] = $value;
-			if(!(trim($value) === '' || $value === null)) {
-				if(!isset($query[$item['pattern']])) {
-					$query[$item['pattern']] = array();
-				}
-				if(isset($item['operator'])) {
-					$query[$item['pattern']][$item['name'].' '.$item['operator']] = $value;
-				} else {
-					$query[$item['pattern']][$item['name']] = $value;
-				}
+		if($this->_data['index_filter']){
+			$query = array();
+			foreach($this->_data['index_filter'] as &$item) {
+				$value = $this->input->get('filter['.$item['name'].']');
+				$item['value'] = $value;
+				if(!(trim($value) === '' || $value === null)) {
+					if(!isset($query[$item['pattern']])) {
+						$query[$item['pattern']] = array();
+					}
+					if(isset($item['operator'])) {
+						$query[$item['pattern']][$item['name'].' '.$item['operator']] = $value;
+					} else {
+						$query[$item['pattern']][$item['name']] = $value;
+					}
 
+				}
 			}
+			$this->_indexFilterQuery = $query;
 		}
-		$this->_indexFilterQuery = $query;
 	}
 
 	/**
@@ -297,10 +307,12 @@ class MY_Controller extends CI_Controller {
 	 * @return void
 	 */
 	protected function _disposeTable() {
-		$result = $this->_model->list($this->_indexFilterQuery, $this->_data['index_pager']['pageNum'], $this->_data['index_pager']['pageSize']);
+		if($this->_model && $this->_data['index_field'] && $this->_data['index_pager']){
+			$result = $this->_model->list($this->_indexFilterQuery, $this->_data['index_pager']['pageNum'], $this->_data['index_pager']['pageSize']);
 
-		$this->_data['index_list'] = $result['list'];
-		$this->_data['index_pager']['count'] = $result['count'];
+			$this->_data['index_list'] = $result['list'];
+			$this->_data['index_pager']['count'] = $result['count'];
+		}
 	}
 
 	/**

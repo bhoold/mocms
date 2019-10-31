@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-27 20:20:52
  * @Last Modified by: Raven
- * @Last Modified time: 2019-09-28 12:54:10
+ * @Last Modified time: 2019-10-31 20:22:15
  */
 
 
@@ -19,7 +19,7 @@ $config = array(
 			),
 			array(
 				'title'	=>	'全局设置',
-				'link'	=>	'/global'
+				'link'	=>	'/config'
 			),
 			array(
 				'title'	=>	'数据字典',
@@ -27,7 +27,7 @@ $config = array(
 			),
 			array(
 				'title'	=>	'清理缓存',
-				'link'	=>	'/clearcache'
+				'link'	=>	'/cache'
 			),
 		),
 	),/*

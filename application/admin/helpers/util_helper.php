@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-07-30 01:37:31
  * @Last Modified by: Raven
- * @Last Modified time: 2019-08-07 00:14:27
+ * @Last Modified time: 2019-10-31 21:20:24
  */
 
 
@@ -156,3 +156,46 @@ if ( ! function_exists('getPageMsg'))
 	}
 
 }
+
+
+if ( ! function_exists('getMenuName'))
+{
+	/**
+	 * 根据路径获取菜单名
+	 *
+	 * @return void
+	 */
+	function getMenuName($path, $menu = null) {
+		if($path[0] == '/') {
+			$path = substr($path, 1);
+		}
+		$name = $path;
+		if(!$menu){
+			$CI =& get_instance();
+			$CI->config->load('app'.DIRECTORY_SEPARATOR.'menu', TRUE);
+			$menu = $CI->config->item('app'.DIRECTORY_SEPARATOR.'menu');
+		}
+		foreach ($menu as $rootMenu) {
+			if(isset($rootMenu['link']) && $rootMenu['link'] == '/'.$path) {
+				$name = $rootMenu['title'];
+			} elseif (isset($rootMenu['child']) && $rootMenu['child']) {
+				$name = getMenuName($path, $rootMenu['child']);
+			}
+			if($name != $path) {
+				break;
+			}
+		}
+		if($name == $path) {
+			$arr = explode('/', $path);
+			if(count($arr) == 2 && $arr[1] == 'index') {
+				$name = getMenuName($arr[0], $menu);
+				if($name == $arr[0]) {
+					$name == $path;
+				}
+			}
+		}
+		return $name;
+	}
+
+}
+

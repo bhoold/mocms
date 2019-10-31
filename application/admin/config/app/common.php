@@ -5,12 +5,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-27 20:20:52
  * @Last Modified by: Raven
- * @Last Modified time: 2019-08-28 04:56:45
+ * @Last Modified time: 2019-10-31 20:08:21
  */
 
 
 $config = array(
-	'page_template' => 'template', //页面模板
+	'page_template' => '/template', //页面模板
 	'page_menu' => '', //头部菜单
 	'page_title' => '', //当前模块菜单名称
 	'page_message' => '', //页面消息
@@ -94,9 +94,9 @@ $config = array(
 	),
 	'index_leftMenu' => array(), //左侧菜单
 	'index_filter' => array(), //列表过滤器数据
-	'index_field' => array(), //列表页字段
+	'index_field' => array(), //列表页字段,如果不需要列表设为false
 	'index_list' => array(), //列表页列表数据
-	'index_pager' => array( //分页
+	'index_pager' => array( //分页,如果不需要分页设为false
 		'count' => 0,
 		'pageNum' => 1,
 		'pageSize' => 10,
