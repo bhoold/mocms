@@ -60,6 +60,14 @@ body {
   font-family: "Segoe UI Webfont", -apple-system, "Helvetica Neue", "Lucida Grande", "Roboto", "Ebrima", "Nirmala UI", "Gadugi", "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", "Tunga", "Lao UI", "Raavi", "Iskoola Pota", "Latha", "Leelawadee", "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa", "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le", "Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
   color: #000000;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.75em;
+}
 /* 按钮容 */
 a.layui-btn,
 .layui-btn {
@@ -320,7 +328,7 @@ a.layui-btn-danger:hover,
 }
 #header .nav .item.level1 .list.level1 .item.level2 .list.level2 {
   top: -6px;
-  left: calc(99%);
+  left: calc(100% - 1px);
 }
 #header .nav .item.level1 .list.level1 .item.level2 .list.level2 .item.level3 > a {
   display: block;
@@ -469,7 +477,7 @@ a.layui-btn-danger:hover,
 #body #main {
   flex: 1;
   padding: 30px;
-  width: calc(-100%);
+  width: calc(100% - 200px);
 }
 #body #main .list-filter .item {
   float: left;

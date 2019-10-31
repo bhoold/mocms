@@ -15,7 +15,7 @@ $config = array(
 		'child'	=>	array(
 			array(
 				'title'	=>	'首页',
-				'link'	=>	'/index'
+				'link'	=>	'/dashboard'
 			),
 			array(
 				'title'	=>	'全局设置',
@@ -115,8 +115,9 @@ $config = array(
 		'title'	=>	'文件',
 		'link'	=>	'/attachment'
 	),
+	/*
 	array(
 		'title'	=>	'行政区域',
 		'link'	=>	'/region'
-	),
+	),*/
 );
