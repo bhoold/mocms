@@ -1,5 +1,5 @@
-<?php include VIEWPATH.'layout_header.php'; ?>
-
+<?php include VIEWPATH.'component/base_header.php'; ?>
+<?php include VIEWPATH.'component/page_header.php'; ?>
 <div id="page-header">
 	<div class="title"><?php echo $page_title;?></div>
 	<div class="tooles btn-containe">
@@ -312,6 +312,6 @@ layui.use(['form','layer','alert','laydate','layregion','util'], function(){
 });
 </script>
 
-<?php include VIEWPATH.'layout_footer.php'; ?>
+<?php include VIEWPATH.'component/base_footer.php'; ?>
 
 

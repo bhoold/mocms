@@ -1,49 +1,7 @@
-<?php include VIEWPATH.'layout_header.php'; ?>
-
-	<div id="page-header">
-		<div class="title"><?php echo $page_title;?></div>
-		<div class="tooles btn-containe">
-			<div class="left">
-				<?php
-				if($index_tooles_btns && isset($index_tooles_btns['left'])) {
-					foreach($index_tooles_btns['left'] as $k => $group) {
-						if($k > 0) {
-							echo '<span class="separator"></span>';
-						}
-						foreach($group as $item) {
-							echo '<button class="layui-btn '.(isset($item['domClass'])?$item['domClass']:'').'" data-type="'.$item['action'].'">'.$item['text'].'</button>';
-						}
-					}
-				}
-				?>
-			</div>
-			<div class="right">
-				<?php
-				if($index_tooles_btns && isset($index_tooles_btns['right'])) {
-					foreach($index_tooles_btns['right'] as $k => $group) {
-						if($k > 0) {
-							echo '<span class="separator"></span>';
-						}
-						foreach($group as $item) {
-							echo '<button class="layui-btn '.(isset($item['domClass'])?$item['domClass']:'').'" data-type="'.$item['action'].'">'.$item['text'].'</button>';
-						}
-					}
-				}
-				?>
-			</div>
-		</div>
-	</div>
+<?php include VIEWPATH.'component/base_header.php'; ?>
+<?php include VIEWPATH.'component/page_header.php'; ?>
 	<div id="page-content">
-		<?php if(count($index_leftMenu)):?>
-		<div id="left-menu">
-			<div class="list">
-				<?php foreach ($index_leftMenu as $item) {
-					echo '<div class="item '.$item['active'].'">'.anchor($item['link'], $item['title']).'</div>';
-				}
-				?>
-			</div>
-		</div>
-		<?php endif;?>
+		<?php include VIEWPATH.'component/left_menu.php'; ?>
 		<div id="main">
 			<?php
 				if($page_message) {
@@ -219,4 +177,4 @@ layui.use(['form','table','laypage','layer','alert'], function(){
 </script>
 
 
-<?php include VIEWPATH.'layout_footer.php'; ?>
+<?php include VIEWPATH.'component/base_footer.php'; ?>

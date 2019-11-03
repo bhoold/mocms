@@ -1,4 +1,4 @@
-<?php include VIEWPATH.'layout_header.php'; ?>
+<?php include VIEWPATH.'component/base_header.php'; ?>
 
 	<div id="page-header">
 		<div class="title">首页</div>
@@ -40,4 +40,4 @@ layui.use(['form', 'table','laypage','layer','alert'], function(){
 </script>
 
 
-<?php include VIEWPATH.'layout_footer.php'; ?>
+<?php include VIEWPATH.'component/base_footer.php'; ?>

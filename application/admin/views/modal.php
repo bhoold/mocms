@@ -1,4 +1,4 @@
-<?php include VIEWPATH.'layout_header_less.php'; ?>
+<?php include VIEWPATH.'component/base_header_less.php'; ?>
 <link rel="stylesheet" href="<?php echo getUrl('base')?>assets/admin/css/page-modal.css"  media="all">
 	<div id="page-modal">
 		<div id="selected">
@@ -218,4 +218,4 @@
 			});
 		});
 	</script>
-<?php include VIEWPATH.'layout_footer_less.php'; ?>
+<?php include VIEWPATH.'component/base_footer_less.php'; ?>
