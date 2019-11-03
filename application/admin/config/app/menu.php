@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-27 20:20:52
  * @Last Modified by: Raven
- * @Last Modified time: 2019-10-31 20:22:15
+ * @Last Modified time: 2019-11-03 00:56:20
  */
 
 
@@ -23,7 +23,7 @@ $config = array(
 			),
 			array(
 				'title'	=>	'数据字典',
-				'link'	=>	'/datadic'
+				'link'	=>	'/dictinfo'
 			),
 			array(
 				'title'	=>	'清理缓存',
