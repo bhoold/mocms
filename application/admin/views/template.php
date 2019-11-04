@@ -1,4 +1,4 @@
-<?php include VIEWPATH.'component/base_header.php'; ?>
+<?php include VIEWPATH.'widget/base_header.php'; ?>
 
 	<div id="page-header">
 		<div class="title"><?php echo $page_title;?></div>
@@ -9,4 +9,4 @@
 		</div>
 	</div>
 
-<?php include VIEWPATH.'component/base_footer.php'; ?>
+<?php include VIEWPATH.'widget/base_footer.php'; ?>

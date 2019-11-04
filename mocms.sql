@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `mocms` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `mocms`;
 -- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
--- Host: localhost    Database: livewebsite
+-- Host: localhost    Database: mocms
 -- ------------------------------------------------------
 -- Server version	8.0.15
 
@@ -213,7 +213,7 @@ CREATE TABLE `site_system_auth_login_attempts` (
   `login` varchar(100) NOT NULL,
   `time` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -266,7 +266,7 @@ CREATE TABLE `site_system_auth_users` (
 
 LOCK TABLES `site_system_auth_users` WRITE;
 /*!40000 ALTER TABLE `site_system_auth_users` DISABLE KEYS */;
-INSERT INTO `site_system_auth_users` VALUES (1,'127.0.0.1','admin','$2y$12$F.1G2c/TQDGg8U5qtmqYG.7O3NAet/e1ld82Txi59U0B.XYYzhQrC','admin@admin.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1268889823,1572180411,1,'Admin','istrator','ADMIN','0'),(2,'::1','sff@qq.com','$2y$10$BV2sVtV1oxKEdDS.O51kLuiwis7Tg4K2ML/A.ETChPO3xSJ0TLk82','sff@qq.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564733317,NULL,1,'test','aa','',''),(4,'::1','test','$2y$10$ea5OdfrJMT3UxVgp0xsoYeqd1IIRoFCuOuf0u2q/CoSyGmCCLjmJK','sdfs@sdf.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564737622,NULL,1,'名字','姓氏2','公司名','ets'),(5,'::1','sd','$2y$10$wnlwYG.hLhFmYGkW7K04R.CTyabwFO.xGEKHhdUYEIMldoI2.9AcS','sdf@q.comk',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564943059,NULL,1,'dsf','b','sdf','g'),(6,'::1','asd','$2y$10$k0nQykxPoPMKdUMR4DHRWew1e52dBVVBW8hOxO8uIJanueq4nSxGW','sfd@qq.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564978389,NULL,1,'sdf','sdf','',''),(7,'::1','sdsdfsd','$2y$10$4HeojX/Pv22oZ6I854DQV.FViiRnA361jKqPXdiaaA1Xg1WUiUtM.','sdfs@sfs.sdfsd',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564978418,NULL,1,'dd','sf','sdf','d'),(9,'::1','arhe','$2y$10$xj3Q48QGYK.3AUWWyoFu8Oatf7aUUaoKMqvQ.GyOoaKWy5/.Vhj8u','se@af.sdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564978496,NULL,1,'fdg','dg','',''),(10,'::1','erg','$2y$10$HLSCLfFQiuVa8Wzq/uLgge5XyQeyTy8odRIQL7oKj5EpUGCOnmt0G','sgs@sdeg.sfd',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564978526,NULL,1,'dg','dfg','',''),(11,'::1','sdfsg','$2y$10$u3xMb2tEZSjT/.Lq.m.akeFiW3OVpQFsj5HgZWhBJoBS8re2HZjhC','fsdf@sg.rge',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564978546,NULL,1,'dgdf','dfg','',''),(12,'::1','testsd','$2y$10$cC/03rsr5hfordB1XLmvj.GFp6gPTieL9n9nmYvdKgLs/Xr6Uspgm','fsgae@xfg.fgdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564981313,NULL,1,NULL,NULL,NULL,NULL),(13,'::1','dga','$2y$10$Lpd74oCkWOnyMQfqMketAu7elvr6A1LSeQ77wdhi8g7L6gxfg8/Ea','sdf@sf.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564989012,NULL,1,NULL,NULL,NULL,NULL),(14,'::1','rgadf','$2y$10$yff/la6Ijr6W4R3ciatfvun.S33oaQ5Zwam27Ebq5/58J9OmT7WjS','dfg@s.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564989041,NULL,1,NULL,NULL,NULL,NULL),(15,'::1','sgad','$2y$10$rv1PcpLYeKq2ekCFlFpTVuG2BNqSLWzIbYPqq4Y68EAyuAo2nRThq','sgfs@gd.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564989080,NULL,1,NULL,NULL,NULL,NULL),(16,'::1','fdgs','$2y$10$2yO9eNNpQNKWoSy2HFWQv.GrxnxZZXq0O8hx3mIpjlafUc4RlfYea','sdgfs@sf.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564989290,NULL,1,NULL,NULL,NULL,NULL),(17,'::1','dsgfds','$2y$10$22AcTHzk3rvzSHuiH1cdcOT1sYgfHUkk/LL2AVv020cHaM1poPNEK','dgs@sg.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564989305,NULL,1,NULL,NULL,NULL,NULL);
+INSERT INTO `site_system_auth_users` VALUES (1,'127.0.0.1','admin','$2y$12$F.1G2c/TQDGg8U5qtmqYG.7O3NAet/e1ld82Txi59U0B.XYYzhQrC','admin@admin.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1268889823,1572856378,1,'Admin','istrator','ADMIN','0'),(2,'::1','sff@qq.com','$2y$10$BV2sVtV1oxKEdDS.O51kLuiwis7Tg4K2ML/A.ETChPO3xSJ0TLk82','sff@qq.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564733317,NULL,1,'test','aa','',''),(4,'::1','test','$2y$10$ea5OdfrJMT3UxVgp0xsoYeqd1IIRoFCuOuf0u2q/CoSyGmCCLjmJK','sdfs@sdf.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564737622,NULL,1,'名字','姓氏2','公司名','ets'),(5,'::1','sd','$2y$10$wnlwYG.hLhFmYGkW7K04R.CTyabwFO.xGEKHhdUYEIMldoI2.9AcS','sdf@q.comk',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564943059,NULL,1,'dsf','b','sdf','g'),(6,'::1','asd','$2y$10$k0nQykxPoPMKdUMR4DHRWew1e52dBVVBW8hOxO8uIJanueq4nSxGW','sfd@qq.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564978389,NULL,1,'sdf','sdf','',''),(7,'::1','sdsdfsd','$2y$10$4HeojX/Pv22oZ6I854DQV.FViiRnA361jKqPXdiaaA1Xg1WUiUtM.','sdfs@sfs.sdfsd',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564978418,NULL,1,'dd','sf','sdf','d'),(9,'::1','arhe','$2y$10$xj3Q48QGYK.3AUWWyoFu8Oatf7aUUaoKMqvQ.GyOoaKWy5/.Vhj8u','se@af.sdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564978496,NULL,1,'fdg','dg','',''),(10,'::1','erg','$2y$10$HLSCLfFQiuVa8Wzq/uLgge5XyQeyTy8odRIQL7oKj5EpUGCOnmt0G','sgs@sdeg.sfd',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564978526,NULL,1,'dg','dfg','',''),(11,'::1','sdfsg','$2y$10$u3xMb2tEZSjT/.Lq.m.akeFiW3OVpQFsj5HgZWhBJoBS8re2HZjhC','fsdf@sg.rge',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564978546,NULL,1,'dgdf','dfg','',''),(12,'::1','testsd','$2y$10$cC/03rsr5hfordB1XLmvj.GFp6gPTieL9n9nmYvdKgLs/Xr6Uspgm','fsgae@xfg.fgdf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564981313,NULL,1,NULL,NULL,NULL,NULL),(13,'::1','dga','$2y$10$Lpd74oCkWOnyMQfqMketAu7elvr6A1LSeQ77wdhi8g7L6gxfg8/Ea','sdf@sf.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564989012,NULL,1,NULL,NULL,NULL,NULL),(14,'::1','rgadf','$2y$10$yff/la6Ijr6W4R3ciatfvun.S33oaQ5Zwam27Ebq5/58J9OmT7WjS','dfg@s.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564989041,NULL,1,NULL,NULL,NULL,NULL),(15,'::1','sgad','$2y$10$rv1PcpLYeKq2ekCFlFpTVuG2BNqSLWzIbYPqq4Y68EAyuAo2nRThq','sgfs@gd.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564989080,NULL,1,NULL,NULL,NULL,NULL),(16,'::1','fdgs','$2y$10$2yO9eNNpQNKWoSy2HFWQv.GrxnxZZXq0O8hx3mIpjlafUc4RlfYea','sdgfs@sf.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564989290,NULL,1,NULL,NULL,NULL,NULL),(17,'::1','dsgfds','$2y$10$22AcTHzk3rvzSHuiH1cdcOT1sYgfHUkk/LL2AVv020cHaM1poPNEK','dgs@sg.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1564989305,NULL,1,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `site_system_auth_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,6 +298,87 @@ LOCK TABLES `site_system_auth_users_groups` WRITE;
 /*!40000 ALTER TABLE `site_system_auth_users_groups` DISABLE KEYS */;
 INSERT INTO `site_system_auth_users_groups` VALUES (1,1,1);
 /*!40000 ALTER TABLE `site_system_auth_users_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `site_system_config`
+--
+
+DROP TABLE IF EXISTS `site_system_config`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `site_system_config` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `value` varchar(45) DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modified_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `site_system_config`
+--
+
+LOCK TABLES `site_system_config` WRITE;
+/*!40000 ALTER TABLE `site_system_config` DISABLE KEYS */;
+INSERT INTO `site_system_config` VALUES (1,'pagelimits','10,20,30,40,50','global','2019-11-04 09:52:08','2019-11-04 09:52:08'),(2,'pageSize','10','global','2019-11-04 09:52:08','2019-11-04 09:52:08'),(3,'listSort','id DESC','global','2019-11-04 09:52:08','2019-11-04 09:52:08');
+/*!40000 ALTER TABLE `site_system_config` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `site_system_dictinfo`
+--
+
+DROP TABLE IF EXISTS `site_system_dictinfo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `site_system_dictinfo` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `value` varchar(45) DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modified_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `site_system_dictinfo`
+--
+
+LOCK TABLES `site_system_dictinfo` WRITE;
+/*!40000 ALTER TABLE `site_system_dictinfo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `site_system_dictinfo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `site_system_dictype`
+--
+
+DROP TABLE IF EXISTS `site_system_dictype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `site_system_dictype` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `value` varchar(45) DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modified_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `site_system_dictype`
+--
+
+LOCK TABLES `site_system_dictype` WRITE;
+/*!40000 ALTER TABLE `site_system_dictype` DISABLE KEYS */;
+/*!40000 ALTER TABLE `site_system_dictype` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -337,4 +418,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-27 21:19:28
+-- Dump completed on 2019-11-04 18:32:16

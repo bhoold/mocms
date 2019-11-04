@@ -1,4 +1,4 @@
-<?php include VIEWPATH.'layout_header.php'; ?>
+<?php include VIEWPATH.'widget/base_header.php'; ?>
 
 <div id="page-header">
 	<div class="title"><?php echo $page_title;?></div>
@@ -156,4 +156,4 @@ layui.use(['form','layer','alert'], function(){
 });
 </script>
 
-<?php include VIEWPATH.'layout_footer.php'; ?>
+<?php include VIEWPATH.'widget/base_footer.php'; ?>

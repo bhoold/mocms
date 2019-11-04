@@ -16,12 +16,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" href="<?php echo getUrl('base')?>assets/admin/layui/css/layui.css"  media="all">
 	<link rel="stylesheet" href="<?php echo getUrl('base')?>assets/admin/css/layout.css"  media="all">
 
-	<script src="<?php echo getUrl('base')?>assets/admin/layui/layui.js" charset="utf-8"></script>
+	<script charset="utf-8" src="<?php echo getUrl('base')?>assets/admin/layui/layui.js"></script>
 	<script>
 		layui.config({
 			base: '<?php echo getUrl('base')?>assets/admin/layui/component/' //假设这是你存放拓展模块的根目录
 		}).extend({ //设定模块别名
-			alert: 'alert/alert'
+			alert: 'alert/alert',
+			layregion: 'region/region'
 		});
 
 		var BASEURL = '<?php echo getUrl('base')?>';

@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-02 23:56:15
  * @Last Modified by: Raven
- * @Last Modified time: 2019-09-19 02:25:07
+ * @Last Modified time: 2019-11-04 17:59:52
  */
 
 
@@ -46,7 +46,7 @@ class MY_Model extends CI_Model {
 	 * @param number $size		每页数量
 	 * @return array
 	 */
-	public function list($filter, $num = 1, $size = 0) {
+	public function list($filter, $num = 1, $size = 0, $sort = 'id DESC') {
 		$this->db->reset_query();
 
 		foreach($filter as $key => $value) {
@@ -65,7 +65,7 @@ class MY_Model extends CI_Model {
 		$count = $this->db->count_all_results('', false);
 
 		$this->db->select('*');
-		$this->db->order_by('id DESC');
+		$this->db->order_by($sort);
 		if($size !== 0) {
 			$this->db->limit($size, ($num-1)*$size);//从0开始要减1
 		}

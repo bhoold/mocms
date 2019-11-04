@@ -1,7 +1,7 @@
-<?php include VIEWPATH.'component/base_header.php'; ?>
-<?php include VIEWPATH.'component/page_header.php'; ?>
+<?php include VIEWPATH.'widget/base_header.php'; ?>
+<?php include VIEWPATH.'widget/page_header.php'; ?>
 	<div id="page-content">
-		<?php include VIEWPATH.'component/left_menu.php'; ?>
+		<?php include VIEWPATH.'widget/left_menu.php'; ?>
 		<div id="main">
 			<?php
 				if($page_message) {
@@ -177,4 +177,4 @@ layui.use(['form','table','laypage','layer','alert'], function(){
 </script>
 
 
-<?php include VIEWPATH.'component/base_footer.php'; ?>
+<?php include VIEWPATH.'widget/base_footer.php'; ?>
