@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-02 23:52:48
  * @Last Modified by: Raven
- * @Last Modified time: 2019-10-31 21:37:23
+ * @Last Modified time: 2019-11-05 02:13:22
  */
 
 
@@ -312,6 +312,30 @@ class MY_Controller extends CI_Controller {
 
 			$this->_data['index_list'] = $result['list'];
 			$this->_data['index_pager']['count'] = $result['count'];
+
+			if(count($this->_data['index_field']) == 0) { //如果没定义列表字段将从数据表获取
+				if(count($result['list']) == 0) { //从数据表获取
+					$fields = $this->_model->getFields();
+					foreach ($fields as $field) {
+						$this->_data['index_field'][] = array(
+							'field' => $field,
+							'label' => $field
+						);
+					}
+				} else { //从返回的数据获取
+					foreach ($result['list'] as $i => $row) {
+						if($i > 0) {
+							break;
+						}
+						foreach ($row as $key => $value) {
+							$this->_data['index_field'][] = array(
+								'field' => $key,
+								'label' => $key
+							);
+						}
+					}
+				}
+			}
 		}
 	}
 

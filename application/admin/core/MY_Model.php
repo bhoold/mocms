@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-02 23:56:15
  * @Last Modified by: Raven
- * @Last Modified time: 2019-11-04 17:59:52
+ * @Last Modified time: 2019-11-05 02:13:16
  */
 
 
@@ -193,6 +193,13 @@ class MY_Model extends CI_Model {
 		return $this->db->where($data)
 						->limit(1)
 						->count_all_results($this->_table) > 0;
+	}
+
+
+	public function getFields()
+	{
+		//return $fields = $this->db->field_data($this->_table);
+		return $fields = $this->db->list_fields($this->_table);
 	}
 
 }
