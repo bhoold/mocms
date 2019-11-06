@@ -37,7 +37,18 @@ $config = array(
 			'title' => '全局设置',
 			'link' => '/config',
 			'active' => 'active'
-		)
+		),
+		array(
+			'title' => '数据字典',
+			'link' => '/config/',
+			'active' => ''
+		),
+		array(
+			'title' => '字典类型',
+			'link' => '/config',
+			'active' => ''
+		),
+
 	), //左侧菜单
 
 	'index_field' => false,

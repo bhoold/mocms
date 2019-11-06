@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-27 20:20:52
  * @Last Modified by: Raven
- * @Last Modified time: 2019-11-04 01:57:44
+ * @Last Modified time: 2019-11-05 14:08:28
  */
 
 
@@ -120,4 +120,8 @@ $config = array(
 		'title'	=>	'行政区域',
 		'link'	=>	'/region'
 	),*/
+	array(
+		'title'	=>	'站点',
+		'link'	=>	'/website'
+	),
 );

@@ -5,12 +5,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-11-04 18:39:59
  * @Last Modified by: Raven
- * @Last Modified time: 2019-11-05 14:21:18
+ * @Last Modified time: 2019-11-05 14:18:33
  */
 
 
 $config = array(
 	'page_template' => '/list',
+	'page_title' => '字典类型',
 	'index_tooles_btns' => array( //按钮
 		'left' => array(
 			array(
@@ -91,12 +92,12 @@ $config = array(
 		array(
 			'title' => '数据字典',
 			'link' => '/dictinfo',
-			'active' => 'active'
+			'active' => ''
 		),
 		array(
 			'title' => '字典类型',
 			'link' => '/dictype',
-			'active' => ''
+			'active' => 'active'
 		),
 
 	), //左侧菜单

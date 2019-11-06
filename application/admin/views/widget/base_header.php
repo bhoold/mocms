@@ -92,9 +92,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script>
 
 
-layui.use(['form','layer','alert'], function(){
-	var $ = layui.jquery,
-		form = layui.form;
+layui.use(['layer','alert'], function(){
+	var $ = layui.jquery;
 
 	$(document).on('click', function() {
 		$('#header .nav > .item .list').addClass('layui-hide');

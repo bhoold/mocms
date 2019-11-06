@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-02 23:52:48
  * @Last Modified by: Raven
- * @Last Modified time: 2019-11-05 02:13:22
+ * @Last Modified time: 2019-11-05 03:31:17
  */
 
 
@@ -178,6 +178,7 @@ class MY_Controller extends CI_Controller {
 	 */
 	public function list() {
 
+		$this->_data['tooles_btns'] = $this->_data['index_tooles_btns'];
 		$this->_disposeListAction();
 		$this->_disposePager();
 		$this->_disposeFilter();
@@ -193,6 +194,8 @@ class MY_Controller extends CI_Controller {
 	 * @return void
 	 */
 	public function add() {
+		$this->_data['tooles_btns'] = $this->_data['edit_tooles_btns'];
+
 		if($this->input->method() == 'post'){
 			$this->_disposeAddData();
 		}
@@ -209,6 +212,8 @@ class MY_Controller extends CI_Controller {
 	 * @return void
 	 */
 	public function edit($id = 0) {
+		$this->_data['tooles_btns'] = $this->_data['edit_tooles_btns'];
+
 		if($id) {
 			if($rowData = $this->_model->get(array('id' => $id))) {
 				$this->_data['edit_formData'] = $rowData;
@@ -395,7 +400,12 @@ class MY_Controller extends CI_Controller {
 	 *
 	 * @return void
 	 */
-	protected function _disposeAddData() {
+	protected function _disposeAddData($post = array()) {
+		if(count($post) == 0) {
+			$post = $this->input->post();
+		}
+		unset($post['_follow-action']);
+		$this->_model->insert($post);
 	}
 
 	/**
@@ -405,5 +415,6 @@ class MY_Controller extends CI_Controller {
 	 * @return void
 	 */
 	protected function _disposeEditData($id) {
+		$post = $this->input->post();
 	}
 }

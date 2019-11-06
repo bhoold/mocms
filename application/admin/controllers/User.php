@@ -148,6 +148,7 @@ class User extends CI_Controller
 				$this->data['index_pager']['pageNum'] = $pageNum;
 				$this->data['index_pager']['pageSize'] = $pageSize;
 			}
+			$this->data['tooles_btns'] = $this->data['index_tooles_btns'];
 
 			$this->_render_page($this->data['page_template'], $this->data);
 		}
@@ -1093,6 +1094,7 @@ class User extends CI_Controller
 				$this->data['index_pager']['pageNum'] = $pageNum;
 				$this->data['index_pager']['pageSize'] = $pageSize;
 			}
+			$this->data['tooles_btns'] = $this->data['index_tooles_btns'];
 
 			$this->_render_page($this->data['page_template'], $this->data);
 		}
