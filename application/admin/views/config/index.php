@@ -6,11 +6,7 @@
 	<div id="page-content">
 		<?php include VIEWPATH.'widget/left_menu.php'; ?>
 		<div id="main">
-			<?php
-				if($page_message) {
-					echo '<div class="info-message layui-alert alert-error"><a class="close">x</a>'.$page_message.'</div>';
-				}
-			?>
+			<?php include VIEWPATH.'widget/page_message.php'; ?>
 			<div id="config-list">
 			<?php echo form_open('auth/create_group', array('id'=>'form','class'=>'layui-form','lay-filter'=>'form')); ?>
 
@@ -19,13 +15,22 @@
 					<div class="layui-form-label-col">
 						<h3>可选择的分页数量</h3>
 					</div>
-					<div class="layui-input-inline">
-						<input type="text" autocomplete="off" class="layui-input" value="10,20,30,40,50">
+					<div class="layui-block">
+						<input type="radio" name="sex" value="0" title="使用全局设置: 10,20,30,40,50">
+					</div>
+					<div class="layui-block">
+						<input type="radio" name="sex" value="0" title="设置">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<div class="layui-form-label-col">
 						<h3>默认选中的分页数量</h3>
+					</div>
+					<div class="layui-block">
+						<input type="radio" name="sex" value="0" title="使用全局设置: 10">
+					</div>
+					<div class="layui-block">
+						<input type="radio" name="sex" value="0" title="设置">
 					</div>
 					<div class="layui-input-inline">
 						<input type="text" autocomplete="off" class="layui-input" value="10">
@@ -38,6 +43,7 @@
 						<h3>排序规则</h3>
 					</div>
 					<div class="layui-block">
+						<p><input type="radio" name="sex" value="0" title="使用全局设置: 按ID正序"></p>
 						<p><input type="radio" name="sex" value="0" title="按ID正序"></p>
 						<p><input type="radio" name="sex" value="1" title="按ID倒序" checked></p>
 						<p><input type="radio" name="sex" value="0" title="按更新时间正序"></p>

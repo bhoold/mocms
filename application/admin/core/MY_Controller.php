@@ -153,7 +153,7 @@ class MY_Controller extends CI_Controller {
 	 *
 	 * @return void
 	 */
-	public function getDisplayData() {
+	public function getData() {
 		return $this->_data;
 	}
 
@@ -232,6 +232,24 @@ class MY_Controller extends CI_Controller {
 		$this->_disposeMessage();
 
 		$this->load->viewEx($this->_data['page_template']);
+	}
+
+	public function setup() {
+		$this->load->model('config_model');
+
+		$filter = array(
+			'where' => array('type' => 'global')
+		);
+		$globalResult = $this->config_model->list($filter);
+
+		$filter = array(
+			'where' => array('type' => $this->router->class.'_'.$this->router->method)
+		);
+		$currentResult = $this->config_model->list($filter);
+
+		$this->_disposeMessage();
+
+		$this->load->viewEx('/config/index');
 	}
 
 	/**

@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-11-04 18:39:59
  * @Last Modified by: Raven
- * @Last Modified time: 2019-11-05 14:21:18
+ * @Last Modified time: 2019-11-08 17:27:28
  */
 
 
@@ -69,6 +69,25 @@ $config = array(
 						';
 					}
 				)
+			),
+			array(
+				array(
+					'text' => '结构',
+					'action' => 'structure',
+					'event' => function() {
+						echo '
+							structure: function() {
+								var checkStatus = table.checkStatus("listTable");
+								if(checkStatus.data.length){
+									var id = checkStatus.data[0].id;
+									location.href = "'.getUrl('index','edit/').'" + id;
+								}else{
+									layer.msg("请从列表选择数据", {icon: 5, shift: 6});
+								}
+							},
+						';
+					}
+				)
 			)
 		),
 		'right' => array(
@@ -89,16 +108,28 @@ $config = array(
 	),
 	'index_leftMenu' => array(
 		array(
-			'title' => '数据字典',
+			'title' => '数据表',
 			'link' => '/dictinfo',
 			'active' => 'active'
 		),
 		array(
-			'title' => '字典类型',
+			'title' => '备份',
 			'link' => '/dictype',
 			'active' => ''
 		),
 
 	), //左侧菜单
 
+	'index_field' => array(
+		array(
+			'type' => 'checkbox',
+			'fixed' => 'left'
+		),
+		array(
+			'field' => 'name',
+			'label' => '表名',
+			'width' => '250'
+		),
+	),
+	'index_pager' => false
 );

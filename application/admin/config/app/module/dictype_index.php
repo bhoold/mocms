@@ -80,7 +80,7 @@ $config = array(
 					'event' => function() {
 						echo '
 							setup: function() {
-								location.href = "'.getUrl('index').'";
+								location.href = "'.getUrl('index', 'setup').'";
 							},
 						';
 					}

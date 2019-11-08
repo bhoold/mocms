@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-27 20:20:52
  * @Last Modified by: Raven
- * @Last Modified time: 2019-11-05 14:08:28
+ * @Last Modified time: 2019-11-08 17:11:25
  */
 
 
@@ -18,12 +18,8 @@ $config = array(
 				'link'	=>	'/dashboard'
 			),
 			array(
-				'title'	=>	'全局设置',
+				'title'	=>	'设置',
 				'link'	=>	'/config'
-			),
-			array(
-				'title'	=>	'数据字典',
-				'link'	=>	'/dictinfo'
 			),
 			array(
 				'title'	=>	'缓存',
@@ -48,6 +44,14 @@ $config = array(
 			),
 		),
 	),*/
+	array(
+		'title'	=>	'数据字典',
+		'link'	=>	'/dictinfo'
+	),
+	array(
+		'title'	=>	'数据库',
+		'link'	=>	'/dbmanage'
+	),
 	array(
 		'title'	=>	'用户',
 		'child'	=>	array(
