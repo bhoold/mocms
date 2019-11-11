@@ -83,4 +83,32 @@ $config = array(
 			'errors' => array('required' => '请输入%s.')
 		)
 	),
+	'dbmanage/add' => array(
+		array(
+			'field' => 'name',
+			'label' => '表名',
+			'rules' => 'trim|required',
+			'errors' => array('required' => '请输入%s.')
+		),
+		array(
+			'field' => 'comment',
+			'label' => '描述',
+			'rules' => 'trim|required',
+			'errors' => array('required' => '请输入%s.')
+		)
+	),
+	'dbmanage/edit' => array(
+		array(
+			'field' => 'name',
+			'label' => '表名',
+			'rules' => 'trim|required',
+			'errors' => array('required' => '请输入%s.')
+		),
+		array(
+			'field' => 'comment',
+			'label' => '描述',
+			'rules' => 'trim|required',
+			'errors' => array('required' => '请输入%s.')
+		)
+	),
 );

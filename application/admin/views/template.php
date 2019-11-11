@@ -5,6 +5,7 @@
 	</div>
 	<div id="page-content">
 		<div id="main">
+		<?php include VIEWPATH.'widget/page_message.php'; ?>
 			<p>未配置模板</p>
 		</div>
 	</div>

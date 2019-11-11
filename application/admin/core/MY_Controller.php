@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-02 23:52:48
  * @Last Modified by: Raven
- * @Last Modified time: 2019-11-05 03:31:17
+ * @Last Modified time: 2019-11-09 17:41:25
  */
 
 
@@ -225,7 +225,7 @@ class MY_Controller extends CI_Controller {
 				$this->_data['edit_hideForm'] = TRUE;
 			}
 		} else {
-			setPageMsg('数据不存在!', 'error');
+			setPageMsg('未提供查询关键词!', 'error');
 			$this->_data['edit_hideForm'] = TRUE;
 		}
 
@@ -337,6 +337,10 @@ class MY_Controller extends CI_Controller {
 			$this->_data['index_pager']['count'] = $result['count'];
 
 			if(count($this->_data['index_field']) == 0) { //如果没定义列表字段将从数据表获取
+				$this->_data['index_field'][] = array(
+					'type' => 'checkbox',
+					'fixed' => 'left'
+				);
 				if(count($result['list']) == 0) { //从数据表获取
 					$fields = $this->_model->getFields();
 					foreach ($fields as $field) {
@@ -419,11 +423,25 @@ class MY_Controller extends CI_Controller {
 	 * @return void
 	 */
 	protected function _disposeAddData($post = array()) {
-		if(count($post) == 0) {
-			$post = $this->input->post();
+		if($this->input->method() == 'post'){
+			if(count($post) == 0) {
+				$post = $this->input->post();
+			}
+			unset($post['_follow-action']);
+
+			if($this->form_validation->run() === FALSE){
+				setPageMsg(validation_errors() ? validation_errors() : '表单未设置验证规则!', 'error');
+				return false;
+			}
+
+			if($this->_model->insert($post)) {
+				setPageMsg('保存成功!', 'success');
+			} else {
+				$error = $this->_model->getError();
+				setPageMsg($error ? $error : '保存失败!', 'error');
+			}
+
 		}
-		unset($post['_follow-action']);
-		$this->_model->insert($post);
 	}
 
 	/**

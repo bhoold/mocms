@@ -137,7 +137,10 @@ if ( ! function_exists('setPageMsg'))
 	 */
 	function setPageMsg($msg, $type = 'info') {
 		$CI =& get_instance();
-		$CI->session->set_flashdata('message', $msg);
+		$CI->session->set_flashdata(array(
+			'messageType' => $type,
+			'message' => $msg
+		));
 	}
 
 }
@@ -152,7 +155,16 @@ if ( ! function_exists('getPageMsg'))
 	 */
 	function getPageMsg() {
 		$CI =& get_instance();
-		return $CI->session->flashdata('message');
+		$type = $CI->session->flashdata('messageType');
+		$message = $CI->session->flashdata('message');
+		if($type) {
+			return array(
+				'type' => $type,
+				'message' => $message,
+			);
+		} else {
+			return $message;
+		}
 	}
 
 }

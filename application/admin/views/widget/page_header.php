@@ -33,9 +33,10 @@
 	</div>
 
 <script>
-layui.use(['layer','alert','util'], function(){
+layui.use(['layer','alert','util','table'], function(){
 	var $ = layui.jquery,
-	util = layui.util;
+	util = layui.util,
+	table = layui.table;
 
 	util.event('lay-btn-event', {
 		<?php

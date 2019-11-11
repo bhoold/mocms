@@ -25,7 +25,7 @@ class Dashboard extends MY_Controller {
 	 */
 	public function index()
 	{
-
+		$this->_disposeMessage();
 		$this->load->viewEx('/dashboard');
 	}
 }

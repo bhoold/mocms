@@ -18,6 +18,8 @@ class MY_Model extends CI_Model {
 
 	protected $_table;
 
+	private $error = '';
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -103,8 +105,10 @@ class MY_Model extends CI_Model {
 	public function insert($data)
 	{
 		$id = 0;
-		if($this->db->insert($this->_table, $data)){
+		if($this->db->insert($this->_table, $data)) {
 			$id = $this->db->insert_id();
+		} else {
+			$this->error = $this->db->error();
 		}
 		return $id;
 		//$this->db->insert_batch()
@@ -122,10 +126,12 @@ class MY_Model extends CI_Model {
 	public function update($where, $data)
 	{
 		$id = 0;
-		if($this->db->update($this->_table, $data, $where)){
+		if($this->db->update($this->_table, $data, $where)) {
 			$query = $this->db->get_where($this->_table, $where);
 			$row = $query->row_array();
 			$id = $row['id'];
+		} else {
+			$this->error = $this->db->error();
 		}
 		return $id;
 		//$this->db->affected_rows();
@@ -152,7 +158,12 @@ class MY_Model extends CI_Model {
 		}else{
 			$this->db->where('id', $idsStr);
 		}
-		return $this->db->delete($this->_table);
+
+		$bool = $this->db->delete($this->_table);
+		if(!$bool) {
+			$this->error = $this->db->error();
+		}
+		return $bool;
 		//$this->db->affected_rows();
 	}
 
@@ -171,7 +182,11 @@ class MY_Model extends CI_Model {
 		}else{
 			$this->db->where('id', $idsStr);
 		}
-		return $this->db->update($this->_table, $data);
+		$bool = $this->db->update($this->_table, $data);
+		if(!$bool) {
+			$this->error = $this->db->error();
+		}
+		return $bool;
 		//$this->db->affected_rows();
 	}
 
@@ -195,11 +210,24 @@ class MY_Model extends CI_Model {
 						->count_all_results($this->_table) > 0;
 	}
 
+	public function isExist($data)
+	{
+		return $this->checkExist($data);
+	}
+
 
 	public function getFields()
 	{
 		//return $fields = $this->db->field_data($this->_table);
 		return $fields = $this->db->list_fields($this->_table);
+	}
+
+
+	public function getError()
+	{
+		$error = $this->error;
+		$this->error = '';
+		return $error;
 	}
 
 }

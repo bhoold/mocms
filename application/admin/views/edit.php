@@ -35,11 +35,7 @@
 </div>
 <div id="page-content">
 	<div id="main">
-		<?php
-			if($message) {
-				echo '<div class="info-message layui-alert alert-error"><a class="close">x</a>'.$message.'</div>';
-			}
-		?>
+		<?php include VIEWPATH.'widget/page_message.php'; ?>
 
 		<?php echo form_open('auth/create_group', array('id'=>'form','class'=>'layui-form','lay-filter'=>'form')); ?>
 			<input type="hidden" name="_follow-action">

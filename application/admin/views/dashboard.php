@@ -5,18 +5,11 @@
 	</div>
 	<div id="page-content">
 		<div id="main">
+			<?php include VIEWPATH.'widget/page_message.php'; ?>
+
 			<h1>欢迎使用我们的内容管理系统</h1>
 			<h5>qq群: 108795026</h5>
 
-			<!--
-			<h1>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz欢迎使用我们的内容管理系统</h1>
-			<h2>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz欢迎使用我们的内容管理系统</h2>
-			<h3>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz欢迎使用我们的内容管理系统</h3>
-			<h4>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz欢迎使用我们的内容管理系统</h4>
-			<h5>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz欢迎使用我们的内容管理系统</h5>
-			<h6>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz欢迎使用我们的内容管理系统</h6>
-			<p>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz欢迎使用我们的内容管理系统</p>
-			-->
 		</div>
 	</div>
 
