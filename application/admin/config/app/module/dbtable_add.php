@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 $config = array(
-	'page_template' => '/dbmanage/edit',
+	'page_template' => '/dbtable/edit',
 
 	'edit_tooles_btns' => array(
 		'left' => array(
@@ -70,4 +70,25 @@ $config = array(
 		),
 		'right' => array()
 	),
+
+	/*
+	'edit_formData' => array(
+		array(
+			'type' => 'text',
+			'label' => langEx('create_group_name_label', 'group_name'),
+			'name' => 'group_name',
+		),
+		array(
+			'type' => 'text',
+			'label' => langEx('create_group_desc_label', 'description'),
+			'name' => 'description',
+		),
+
+		array(
+			'type' => 'password',
+			'label' => form_labelEx('密码', 'password'),
+			'name' => 'pwd',
+		),
+
+	)*/
 );

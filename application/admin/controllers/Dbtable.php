@@ -12,8 +12,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  /**
   * 数据库
   */
-class Dbmanage extends MY_Controller {
+class Dbtable extends MY_Controller {
 
+	/**
+	 * 添加页面
+	 *
+	 * @return void
+	 */
 	public function add() {
 		$this->_data['tooles_btns'] = $this->_data['edit_tooles_btns'];
 
@@ -35,6 +40,12 @@ class Dbmanage extends MY_Controller {
 		$this->load->viewEx($this->_data['page_template']);
 	}
 
+	/**
+	 * 编辑页面
+	 *
+	 * @param string $name
+	 * @return void
+	 */
 	public function edit($name = '') {
 		$this->_data['tooles_btns'] = $this->_data['edit_tooles_btns'];
 
@@ -129,6 +140,11 @@ class Dbmanage extends MY_Controller {
 		}
 	}
 
+	/**
+	 * 处理编辑页面的表单数据
+	 *
+	 * @return void
+	 */
 	protected function _disposeEditData($name) {
 		if($this->input->method() == 'post') {
 			$post = $this->input->post(array('name','comment'));
@@ -162,6 +178,21 @@ class Dbmanage extends MY_Controller {
 					setPageMsg($error ? $error : '保存失败!', 'error');
 				}
 			}
+		}
+	}
+
+
+	/**
+	 * 列表页面删除记录
+	 *
+	 * @param string $idsStr
+	 * @return void
+	 */
+	protected function _delete($idsStr) {
+		if($this->_model->delete($idsStr)){
+			setPageMsg($idsStr . ' ' . '删除成功!', 'success');
+		}else{
+			setPageMsg($idsStr . ' ' . '删除失败!', 'error');
 		}
 	}
 }

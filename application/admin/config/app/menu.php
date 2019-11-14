@@ -50,7 +50,7 @@ $config = array(
 	),
 	array(
 		'title'	=>	'数据库',
-		'link'	=>	'/dbmanage'
+		'link'	=>	'/dbtable'
 	),
 	array(
 		'title'	=>	'用户',

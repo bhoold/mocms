@@ -83,7 +83,7 @@ $config = array(
 			'errors' => array('required' => '请输入%s.')
 		)
 	),
-	'dbmanage/add' => array(
+	'dbtable/add' => array(
 		array(
 			'field' => 'name',
 			'label' => '表名',
@@ -97,7 +97,7 @@ $config = array(
 			'errors' => array('required' => '请输入%s.')
 		)
 	),
-	'dbmanage/edit' => array(
+	'dbtable/edit' => array(
 		array(
 			'field' => 'name',
 			'label' => '表名',

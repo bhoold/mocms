@@ -1,5 +1,5 @@
 			<?php
-				if($index_pager || count($index_filter)){
+				//if($index_pager || count($index_filter)){
 					echo '<div class="list-filter">';
 					echo form_open(uri_string(), array('method'=>'get','class'=>'layui-form','lay-filter'=>'form'));
 					if($index_pager) {
@@ -21,7 +21,7 @@
 					}
 					echo form_close();
 					echo '</div>';
-				}
+				//}
 			?>
 
 <script>

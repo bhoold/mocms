@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 
 
-class dbmanage_model extends CI_Model {
+class dbtable_model extends CI_Model {
 
 	public function list()
 	{
@@ -67,6 +67,23 @@ class dbmanage_model extends CI_Model {
 		$sql = 'SHOW TABLE status FROM '.$this->db->database.' where Name=\''.$name.'\'';
 		$query = $this->db->query($sql);
 		return $query->row_array();
+	}
+
+	public function delete($names)
+	{
+		$idsStr = '';
+		if(is_array($names)) {
+			$idsStr = implode(',', $names);
+		} else {
+			$idsStr = $names;
+		}
+
+		$sql = 'DROP TABLE '.$idsStr;
+		$bool = $this->db->query($sql);
+		if(!$bool) {
+			$this->error = $this->db->error();
+		}
+		return $bool;
 	}
 
 	public function isExist($name)
