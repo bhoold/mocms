@@ -38,6 +38,18 @@ class dbmanage_model extends CI_Model {
 		}
 	}
 
+	public function modifyComment($name, $comment)
+	{
+
+		$sql = 'ALTER TABLE '.$name.' COMMENT = \''.$comment.'\'';
+		if($query = $this->db->query($sql)) {
+			return true;
+		} else {
+			$this->error = $this->db->error();
+			return false;
+		}
+	}
+
 	public function update($name, $data)
 	{
 
@@ -61,6 +73,6 @@ class dbmanage_model extends CI_Model {
 	{
 		$sql = 'SHOW TABLE status FROM '.$this->db->database.' where Name=\''.$name.'\'';
 		$query = $this->db->query($sql);
-		return $query->result_array() > 0;
+		return count($query->result_array()) > 0;
 	}
 }

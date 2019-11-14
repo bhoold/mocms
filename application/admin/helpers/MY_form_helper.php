@@ -65,6 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$attrLabel = '';
 		$attrInput = '';
 
+
 		foreach ($extra as $key => $value) {
 			switch($key) {
 				case 'item':
@@ -77,14 +78,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		}
 
+		$label = '<label class="layui-form-label" '.$attrLabel.'>'.$label.'</label>';
+		$item;
+
 		$str = '';
 		 switch($type) {
 			case 'text':
 			case 'password':
-				$str = '<div class="layui-form-item" '.$attrItem.'><label class="layui-form-label" '.$attrLabel.'>'.$label.'</label><div class="layui-input-block"><input class="layui-input" type="'.$type.'" autocomplete="off" '.$attrLabel.'></div></div>';
+				$str = '<div class="layui-form-item" '.$attrItem.'>'.$label.'<div class="layui-input-block"><input class="layui-input" type="'.$type.'" autocomplete="off" '.$attrLabel.'></div></div>';
 				break;
 
 		 }
+
+		 $str = '<div class="layui-form-item" '.$attrItem.'>'.$label.$item.'</div>';
 		 return $str;
 	 }
  }

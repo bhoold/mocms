@@ -14,17 +14,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   */
 class Dbmanage extends MY_Controller {
 
+	public function add() {
+		$this->_data['tooles_btns'] = $this->_data['edit_tooles_btns'];
+
+		if($this->input->method() == 'post'){
+			$this->_disposeAddData();
+			$this->_data['edit_formData'] = array(
+				'name' => $this->form_validation->set_value('name'),
+				'comment' => $this->form_validation->set_value('comment')
+			);
+		} else {
+			$this->_data['edit_formData'] = array(
+				'name' => '',
+				'comment' => ''
+			);
+		}
+
+		$this->_disposeMessage();
+
+		$this->load->viewEx($this->_data['page_template']);
+	}
+
 	public function edit($name = '') {
 		$this->_data['tooles_btns'] = $this->_data['edit_tooles_btns'];
 
 		if($name) {
 			if($rowData = $this->_model->get($name)) {
-				$this->_data['edit_formData'] = array(
-					'name' => $rowData['Name'],
-					'comment' => $rowData['Comment']
-				);
 				if($this->input->method() == 'post') {
 					$this->_disposeEditData($name);
+					$this->_data['edit_formData'] = array(
+						'name' => $this->form_validation->set_value('name'),
+						'comment' => $this->form_validation->set_value('comment')
+					);
+				} else {
+					$this->_data['edit_formData'] = array(
+						'name' => $rowData['Name'],
+						'comment' => $rowData['Comment']
+					);
 				}
 			} else {
 				setPageMsg('数据不存在!', 'error');
@@ -87,7 +113,7 @@ class Dbmanage extends MY_Controller {
 			}
 
 
-			if($this->_model->isExist($name)) {
+			if($this->_model->isExist($post['name'])) {
 				setPageMsg('表名已存在!', 'error');
 				return;
 			}
@@ -112,15 +138,30 @@ class Dbmanage extends MY_Controller {
 				return;
 			}
 
-			if($this->_model->update($name, $post)) {
-				setPageMsg('保存成功!', 'success');
+			if($name != $post['name']) {
+				if($this->_model->isExist($post['name'])) {
+					setPageMsg('表名已存在!', 'error');
+					return;
+				} else {
+					if($this->_model->update($name, $post)) {
+						setPageMsg('保存成功!', 'success');
 
-				$this->_forward($post['name']);
+						$this->_forward($post['name']);
+					} else {
+						$error = $this->_model->getError();
+						setPageMsg($error ? $error : '保存失败!', 'error');
+					}
+				}
 			} else {
-				$error = $this->_model->getError();
-				setPageMsg($error ? $error : '保存失败!', 'error');
-			}
+				if($this->_model->modifyComment($name, $post['comment'])) {
+					setPageMsg('保存成功!', 'success');
 
+					$this->_forward($post['name']);
+				} else {
+					$error = $this->_model->getError();
+					setPageMsg($error ? $error : '保存失败!', 'error');
+				}
+			}
 		}
 	}
 }

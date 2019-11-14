@@ -6,18 +6,33 @@
 
 		<?php echo form_open(current_url(), array('id'=>'form','class'=>'layui-form','lay-filter'=>'form')); ?>
 			<input type="hidden" name="_follow-action">
-
+			<?php
+			/*
+				if($edit_formData) {
+					foreach ($edit_formData as $item) {
+						echo form_item($item);
+						$label = $item['label'];
+						unset($item['label']);
+						$str = '<div class="layui-form-item">';
+						$str .= $label;
+						$str .= '<div class="layui-input-inline">';
+						$str .= form_inputEx($item);
+						$str .= '</div></div>';
+						echo $str;
+					}
+				}*/
+			?>
 			<div class="layui-form-item">
 				<label class="layui-form-label">表名</label>
 				<div class="layui-input-inline">
-					<input name="name" type="text" autocomplete="off" class="layui-input">
+					<input name="name" type="text" autocomplete="off" class="layui-input" value="<?php echo $edit_formData['name']; ?>">
 				</div>
 			</div>
 
 			<div class="layui-form-item">
 				<label class="layui-form-label">描述</label>
 				<div class="layui-input-inline">
-					<input name="comment" type="text" autocomplete="off" class="layui-input">
+					<input name="comment" type="text" autocomplete="off" class="layui-input" value="<?php echo $edit_formData['comment']; ?>">
 				</div>
 			</div>
 

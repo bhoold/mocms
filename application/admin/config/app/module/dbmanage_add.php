@@ -71,6 +71,7 @@ $config = array(
 		'right' => array()
 	),
 
+	/*
 	'edit_formData' => array(
 		array(
 			'type' => 'text',
@@ -89,5 +90,5 @@ $config = array(
 			'name' => 'pwd',
 		),
 
-	)
+	)*/
 );
