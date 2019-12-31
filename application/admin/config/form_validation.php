@@ -111,4 +111,24 @@ $config = array(
 			'errors' => array('required' => '请输入%s.')
 		)
 	),
+	'dbfield/add' => array(
+		array(
+			'field' => 'name',
+			'label' => '字段名',
+			'rules' => 'trim|required',
+			'errors' => array('required' => '请输入%s.')
+		),
+		array(
+			'field' => 'comment',
+			'label' => '描述',
+			'rules' => 'trim|required',
+			'errors' => array('required' => '请输入%s.')
+		),
+		array(
+			'field' => 'type',
+			'label' => '类型',
+			'rules' => 'trim|required',
+			'errors' => array('required' => '请输入%s.')
+		)
+	),
 );

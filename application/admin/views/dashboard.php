@@ -8,8 +8,11 @@
 			<?php include VIEWPATH.'widget/page_message.php'; ?>
 
 			<h1>欢迎使用我们的内容管理系统</h1>
-			<h5>qq群: 108795026</h5>
+			<p>qq群：108795026</p>
 
+			<hr>
+			<p>CI版本：<?php echo $ciVer;?></p>
+			<p>数据库：<?php echo $dbName.$dbVer;?></p>
 		</div>
 	</div>
 

@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-08-27 20:20:52
  * @Last Modified by: Raven
- * @Last Modified time: 2019-10-31 20:08:21
+ * @Last Modified time: 2019-11-16 13:44:34
  */
 
 
@@ -14,6 +14,9 @@ $config = array(
 	'page_menu' => '', //头部菜单
 	'page_title' => '', //当前模块菜单名称
 	'page_message' => '', //页面消息
+	'page_get' => array(),
+	'page_post' => array(),
+
 
 	//列表页面
 	'index_tooles_btns' => array( //按钮

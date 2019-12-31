@@ -26,6 +26,12 @@ class Dashboard extends MY_Controller {
 	public function index()
 	{
 		$this->_disposeMessage();
+
+		$this->_data['ciVer'] = CI_VERSION;
+		$this->_data['dbName'] = $this->db->platform();
+		$this->_data['dbVer'] = $this->db->version();
+
+
 		$this->load->viewEx('/dashboard');
 	}
 }

@@ -31,7 +31,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" href="<?php echo getUrl('base')?>assets/admin/malihu-custom-scrollbar-plugin-3.1.5/jquery.mCustomScrollbar.css" />
 	<script charset="utf-8" src="<?php echo getUrl('base')?>assets/admin/malihu-custom-scrollbar-plugin-3.1.5/js/minified/jquery-1.11.0.min.js"></script>
 	<script charset="utf-8" src="<?php echo getUrl('base')?>assets/admin/malihu-custom-scrollbar-plugin-3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
+	<script>
+var PAGEVAR = {
+	GET: {
+		<?php
+		foreach ($page_get as $key => $value) {
+			echo $key.':"'.$value.'"';
+		}
+		?>
+	},
+	POST: {
+		<?php
+		foreach ($page_post as $key => $value) {
+			echo $key.':"'.$value.'"';
+		}
+		?>
+	}
+}
+</script>
 </head>
 <body>
 <div id="body">

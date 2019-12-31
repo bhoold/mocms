@@ -5,37 +5,78 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-10-31 19:11:28
  * @Last Modified by: Raven
- * @Last Modified time: 2019-11-10 01:10:58
+ * @Last Modified time: 2019-11-30 00:36:48
  */
 
 
  /**
-  * 数据表
+  * 表字段
   */
-class Dbtable extends MY_Controller {
+class Dbfield extends MY_Controller {
+
+	/**
+	 * 默认页面
+	 *
+	 * @return void
+	 */
+	public function index($tableName = null) {
+		/*
+		func_get_args
+		func_num_args
+		//echo $this->db->last_query();
+		*/
+		return $this->list($tableName); //index只做引导
+	}
+
+	/**
+	 * 列表页面
+	 *
+	 * @return void
+	 */
+	public function list($tableName = null) {
+
+		$this->_data['tooles_btns'] = $this->_data['index_tooles_btns'];
+		$this->_disposeListAction();
+		$this->_disposePager();
+		$this->_disposeFilter();
+		$this->_disposeTable($tableName);
+		$this->_disposeMessage();
+
+		$this->_data['page_get']['tableName'] = $tableName;
+
+		$this->load->viewEx($this->_data['page_template']);
+	}
 
 	/**
 	 * 添加页面
 	 *
 	 * @return void
 	 */
-	public function add() {
+	public function add($tableName = null) {
 		$this->_data['tooles_btns'] = $this->_data['edit_tooles_btns'];
 
 		if($this->input->method() == 'post'){
-			$this->_disposeAddData();
+			$this->_disposeAddData($tableName);
 			$this->_data['edit_formData'] = array(
 				'name' => $this->form_validation->set_value('name'),
-				'comment' => $this->form_validation->set_value('comment')
+				'comment' => $this->form_validation->set_value('comment'),
+				'type' => $this->form_validation->set_value('type'),
+				'value' => $this->form_validation->set_value('value'),
+				'length' => $this->form_validation->set_value('length')
 			);
 		} else {
 			$this->_data['edit_formData'] = array(
 				'name' => '',
-				'comment' => ''
+				'comment' => '',
+				'type' => '',
+				'value' => '',
+				'length' => ''
 			);
 		}
 
 		$this->_disposeMessage();
+
+		$this->_data['page_get']['tableName'] = $tableName;
 
 		$this->load->viewEx($this->_data['page_template']);
 	}
@@ -46,13 +87,13 @@ class Dbtable extends MY_Controller {
 	 * @param string $name
 	 * @return void
 	 */
-	public function edit($name = '') {
+	public function edit($tableName = '') {
 		$this->_data['tooles_btns'] = $this->_data['edit_tooles_btns'];
 
-		if($name) {
-			if($rowData = $this->_model->get($name)) {
+		if($tableName) {
+			if($rowData = $this->_model->get($tableName)) {
 				if($this->input->method() == 'post') {
-					$this->_disposeEditData($name);
+					$this->_disposeEditData($tableName);
 					$this->_data['edit_formData'] = array(
 						'name' => $this->form_validation->set_value('name'),
 						'comment' => $this->form_validation->set_value('comment')
@@ -74,6 +115,8 @@ class Dbtable extends MY_Controller {
 
 		$this->_disposeMessage();
 
+		$this->_data['page_get']['tableName'] = $tableName;
+
 		$this->load->viewEx($this->_data['page_template']);
 	}
 
@@ -82,9 +125,19 @@ class Dbtable extends MY_Controller {
 	 *
 	 * @return void
 	 */
-	protected function _disposeTable() {
+	protected function _disposeTable($tableName = null) {
 		if($this->_model && $this->_data['index_field'] !== false){
-			$list = $this->_model->list();
+			if(!$tableName) {
+				setPageMsg('未选择数据表!', 'error');
+				return;
+			}
+
+			if(!$this->_model->isExistTable($tableName)) {
+				setPageMsg($tableName.'数据表不存在!', 'error');
+				return;
+			}
+
+			$list = $this->_model->list($tableName);
 			$this->_data['index_list'] = $list;
 
 			if(count($this->_data['index_field']) == 0) { //如果没定义列表字段将从数据表获取
@@ -112,10 +165,10 @@ class Dbtable extends MY_Controller {
 	 *
 	 * @return void
 	 */
-	protected function _disposeAddData($post = array()) {
+	protected function _disposeAddData($tableName = null, $post = array()) {
 		if($this->input->method() == 'post'){
 			if(count($post) == 0) {
-				$post = $this->input->post(array('name','comment'));
+				$post = $this->input->post(array('name','comment','type','length','value','other'));
 			}
 
 			if($this->form_validation->run() === FALSE){
@@ -124,14 +177,14 @@ class Dbtable extends MY_Controller {
 			}
 
 
-			if($this->_model->isExist($post['name'])) {
-				setPageMsg('表名已存在!', 'error');
+			if($this->_model->isExist($tableName, $post['name'])) {
+				setPageMsg('字段已存在!', 'error');
 				return;
 			}
 
-			if($this->_model->create($post['name'], $post['comment'])) {
+			if($this->_model->create($tableName, $post)) {
 				setPageMsg('保存成功!', 'success');
-				$this->_forward($post['name']);
+				$this->_forward($tableName, $post['name']);
 			} else {
 				$error = $this->_model->getError();
 				setPageMsg($error ? $error : '保存失败!', 'error');
@@ -193,6 +246,24 @@ class Dbtable extends MY_Controller {
 			setPageMsg($idsStr . ' ' . '删除成功!', 'success');
 		}else{
 			setPageMsg($idsStr . ' ' . '删除失败!', 'error');
+		}
+	}
+
+
+	/**
+	 * 新增和编辑页面成功后跳转
+	 *
+	 * @param integer $id
+	 * @return void
+	 */
+	protected function _forward($tableName = null, $name = null) {
+		$follow_action = $this->input->post('_follow-action');
+		if($follow_action === 'save_new') {
+			redirectEx('add/'.$tableName, 'location');
+		} elseif($follow_action === 'save_close') {
+			redirectEx('index/'.$tableName, 'location');
+		} elseif($name) {
+			redirectEx('edit/'.$tableName.'/'.$name, 'location');
 		}
 	}
 }

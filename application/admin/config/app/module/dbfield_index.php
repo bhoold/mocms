@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Raven
  * @Date: 2019-11-04 18:39:59
  * @Last Modified by: Raven
- * @Last Modified time: 2019-11-15 01:34:57
+ * @Last Modified time: 2019-11-16 13:38:01
  */
 
 
@@ -21,7 +21,7 @@ $config = array(
 					'event' => function() {
 						echo '
 							add: function() {
-								location.href = "'.getUrl('index','add').'";
+								location.href = "'.getUrl('index','add').'/" + PAGEVAR.GET.tableName;
 							},
 						';
 					}
@@ -69,25 +69,6 @@ $config = array(
 						';
 					}
 				)
-			),
-			array(
-				array(
-					'text' => '字段',
-					'action' => 'structure',
-					'event' => function() {
-						echo '
-							structure: function() {
-								var checkStatus = table.checkStatus("listTable");
-								if(checkStatus.data.length){
-									var id = checkStatus.data[0].Name;
-									location.href = "'.getUrl('index','/dbfield/index/').'" + id;
-								}else{
-									layer.msg("请从列表选择数据", {icon: 5, shift: 6});
-								}
-							},
-						';
-					}
-				)
 			)
 		),
 		'right' => array(
@@ -126,44 +107,34 @@ $config = array(
 			'fixed' => 'left'
 		),
 		array(
-			'field' => 'Name',
-			'label' => 'Name',
+			'field' => 'Field',
+			'label' => 'Field',
+			'width' => '250'
+		),
+		array(
+			'field' => 'Type',
+			'label' => 'Type',
+			'width' => '250'
+		),
+		array(
+			'field' => 'Null',
+			'label' => 'Null',
+			'width' => '100'
+		),
+		array(
+			'field' => 'Key',
+			'label' => 'Key',
+			'width' => '100'
+		),
+		array(
+			'field' => 'Default',
+			'label' => 'Default',
 			'width' => '300'
 		),
 		array(
-			'field' => 'Engine',
-			'label' => 'Engine',
-			'width' => '100'
-		),
-		array(
-			'field' => 'Collation',
-			'label' => 'Collation',
-			'width' => '150'
-		),
-		array(
-			'field' => 'Rows',
-			'label' => 'Rows',
-			'width' => '100'
-		),
-		array(
-			'field' => 'Auto_increment',
-			'label' => 'Auto_increment',
-			'width' => '150'
-		),
-		array(
-			'field' => 'Comment',
-			'label' => 'Comment',
-			'width' => '200'
-		),
-		array(
-			'field' => 'Create_time',
-			'label' => 'Create_time',
-			'width' => '200'
-		),
-		array(
-			'field' => 'Update_time',
-			'label' => 'Update_time',
-			'width' => '200'
+			'field' => 'Extra',
+			'label' => 'Extra',
+			'width' => '500'
 		)
 	),
 	'index_pager' => false
